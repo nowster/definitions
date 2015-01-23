@@ -1,6 +1,12 @@
 name: gcc
 kind: chunk
 
+pre-configure-commands:
+- |
+  case "$MORPH_ARCH" in
+      mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
+  esac
+
 configure-commands:
 - mkdir o
 
@@ -18,6 +24,7 @@ configure-commands:
                             --with-fpu=vfpv3-d16 \
                             --with-float=hard" ;;
       armv7*)   ARCH_FLAGS="--with-arch=armv7-a" ;;
+      mips64*)  ARCH_FLAGS="--with-arch=octeon2" ;;
   esac
 
   cd o && ../configure                                        \
