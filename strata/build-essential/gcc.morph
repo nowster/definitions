@@ -23,6 +23,12 @@ pre-configure-commands:
       mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
   esac
 
+pre-configure-commands:
+- |
+  case "$MORPH_ARCH" in
+      mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
+  esac
+
 configure-commands:
 - mkdir o
 

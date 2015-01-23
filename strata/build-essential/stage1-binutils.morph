@@ -21,6 +21,7 @@ configure-commands:
   esac
   TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
   ./configure --prefix="$PREFIX" --disable-nls --disable-werror \
+    $ARCH_FLAGS                                                 \
     --build=$(sh config.guess) \
     --host=$(sh config.guess) \
     --target=$TARGET_STAGE1 \
