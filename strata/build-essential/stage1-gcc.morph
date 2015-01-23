@@ -1,6 +1,12 @@
 name: stage1-gcc
 kind: chunk
 
+pre-configure-commands:
+- |
+  case "$MORPH_ARCH" in
+      mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
+  esac
+
 configure-commands:
 # Workaround from LFS due GCC not detecting stack protection correctly
 - sed -i '/k prot/agcc_cv_libc_provides_ssp=yes' gcc/configure
@@ -30,6 +36,8 @@ configure-commands:
                             --with-fpu=vfpv3-d16 \
                             --with-float=hard" ;;
       armv7*)   ARCH_FLAGS="--with-arch=armv7-a" ;;
+      mips64*)  ARCH_FLAGS="--with-arch=octeon2 \
+                            --with-abi=64" ;;
   esac
 
   cd o && ../configure                                        \
