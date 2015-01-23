@@ -1,5 +1,12 @@
 name: stage2-gcc-fixed-headers
 kind: chunk
+
+pre-configure-commands:
+- |
+  case "$MORPH_ARCH" in
+      mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
+  esac
+
 install-commands:
 # Stage 1 GCC's fixincludes process created a limits.h before there was
 # a real limits.h available for the target. This step (taken from Linux
