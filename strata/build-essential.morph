@@ -51,8 +51,8 @@ chunks:
 - name: stage1-binutils
   morph: strata/build-essential/stage1-binutils.morph
   repo: upstream:binutils-tarball
-  ref: 5500a97a2ad1735db5b35bc51cfb825c1f4c38df
-  unpetrify-ref: binutils-2.25
+  ref: a0b932415fc16f729e5c007b86b40740e31737f3
+  unpetrify-ref: baserock/2.25-mips64
   build-mode: bootstrap
   prefix: /tools
 
@@ -105,8 +105,8 @@ chunks:
 - name: stage2-binutils
   morph: strata/build-essential/stage2-binutils.morph
   repo: upstream:binutils-tarball
-  ref: 5500a97a2ad1735db5b35bc51cfb825c1f4c38df
-  unpetrify-ref: binutils-2.25
+  ref: a0b932415fc16f729e5c007b86b40740e31737f3
+  unpetrify-ref: baserock/2.25-mips64
   build-depends:
   - stage1-binutils
   - stage1-gcc
@@ -286,8 +286,8 @@ chunks:
 - name: binutils
   morph: strata/build-essential/binutils.morph
   repo: upstream:binutils-tarball
-  ref: 5500a97a2ad1735db5b35bc51cfb825c1f4c38df
-  unpetrify-ref: binutils-2.25
+  ref: a0b932415fc16f729e5c007b86b40740e31737f3
+  unpetrify-ref: baserock/2.25-mips64
   build-depends:
   - stage2-binutils
   - stage2-busybox

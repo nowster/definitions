@@ -4,6 +4,9 @@ build-system: autotools
 
 configure-commands:
 - |
+  case "$MORPH_ARCH" in
+      mips64*)  ARCH_FLAGS="--with-arch=octeon2" ;;
+  esac
   export STAGE2_SYSROOT="$(dirname $(pwd))"
   export CXX="$TARGET_STAGE1-g++ --sysroot=$STAGE2_SYSROOT"
   # binutils has its own embedded libtool, which is old and strips out
@@ -11,6 +14,7 @@ configure-commands:
   # include the sysroot flag
   export CC="$TARGET_STAGE1-gcc --sysroot=$STAGE2_SYSROOT"
   ./configure --prefix="$PREFIX" --disable-nls --disable-werror \
+    $ARCH_FLAGS                                                 \
     --build=$(sh config.guess) \
     --host=$TARGET_STAGE1 \
     --target=$TARGET_STAGE1
