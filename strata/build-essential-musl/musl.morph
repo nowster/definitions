@@ -1,0 +1,9 @@
+name: musl
+kind: chunk
+configure-commands:
+- ./configure --prefix="$PREFIX"
+build-commands:
+- make
+install-commands:
+- make install
+- install -d "$DESTDIR/etc" ; echo "/usr/lib64:/usr/lib" >> "$DESTDIR/etc/ld-musl-x86_64.path"

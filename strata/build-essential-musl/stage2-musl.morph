@@ -1,0 +1,47 @@
+name: stage2-musl
+kind: chunk
+configure-commands:
+# Configure flag notes:
+#   1. Avoid installing to PREFIX/lib64 on x86_64.
+#   2. Location of linux-api-headers.
+#   3. Normal flags. See glibc.morph.
+#   4. Force configuration values of certain things that can't be detected
+#      in a cross-compile.
+- |
+  export CFLAGS="-O2 $CFLAGS"; export CXX=false; \
+  ./configure \
+    CROSS_COMPILE=x86_64-linux-musl- \
+    $ARCH_FLAGS \
+    --prefix="$PREFIX" \
+    --host=x86_64-linux-musl \
+    --disable-gcc-wrapper \
+    `# [1]` --libdir="$PREFIX/lib" \
+    `# [2]` --with-headers="$(pwd)/../../$PREFIX/include" \
+    `# [3]` --disable-profile  --enable-kernel=2.6.25 \
+    `# [4]` libc_cv_c_cleanup=yes libc_cv_ctors_header=yes \
+            libc_cv_forced_unwind=yes libc_cv_ssp=no
+
+build-commands:
+- make localtime=UTC
+
+install-commands:
+- make install_root="$DESTDIR" localtime=UTC install
+- sh stage2-musl-fix-specs
+
+# Install a symlink for the program interpreter (ld.so) so that binaries
+# built in stage 3 before the stage 3 musl is built can use it.        
+# sysdeps/unix/sysv/linux/configure.      
+- install -d $DESTDIR/lib           
+- |                      
+  cpu=$(echo $TARGET | cut -d '-' -f 1)
+  case "$cpu" in                       
+  x86_64)       
+    cd "$DESTDIR$PREFIX"/lib ; ln -s libc.so ld-musl-x86_64.so.1 ;;
+  ppc64)                                          
+    install -d "$DESTDIR/lib64"
+    ln -s "$PREFIX/lib/ld64.so.1" \
+          "$DESTDIR/lib64/ld64.so.1" ;;
+  *)                                   
+    loader=$(basename $(ls "$DESTDIR$PREFIX"/lib/ld-musl*))
+    ln -s "$PREFIX/lib/$loader" "$DESTDIR/lib/$loader"      
+  esac
