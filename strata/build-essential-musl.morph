@@ -168,9 +168,9 @@ chunks:
 
 - name: stage2-make-musl
   morph: strata/build-essential-musl/stage2-make.morph
-  repo: file:///src/workspace/make
-  ref: 0559ff870e348083a3b8329f70d56646bd7e4261
-  unpetrify-ref: baserock/build-essential
+  repo: upstream:make-tarball
+  ref: f75919b038da8a28388a911303fb86ed7a70ea2c                            
+  unpetrify-ref: make-4.1 
   build-depends:
   - stage1-binutils-musl
   - stage1-gcc-musl
@@ -346,9 +346,9 @@ chunks:
 
 - name: make-musl
   morph: strata/build-essential-musl/make.morph
-  repo: file:///src/workspace/make
-  ref: 0559ff870e348083a3b8329f70d56646bd7e4261
-  unpetrify-ref: baserock/build-essential
+  repo: upstream:make-tarball
+  ref: f75919b038da8a28388a911303fb86ed7a70ea2c                            
+  unpetrify-ref: make-4.1 
   build-depends:
   - stage2-binutils-musl
   - stage2-busybox-musl
