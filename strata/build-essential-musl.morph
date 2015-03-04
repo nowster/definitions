@@ -242,7 +242,7 @@ chunks:
   - linux-api-headers-musl
 
 - name: zlib-musl
-  morph: strata/build-essential-musl/zlib-musl.morph
+  morph: strata/build-essential-musl/zlib.morph
   repo: upstream:zlib
   ref: db333af7e9b90a23fd7f9cd8dc128123b34bf698
   unpetrify-ref: baserock/build-essential

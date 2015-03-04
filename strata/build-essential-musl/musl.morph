@@ -6,4 +6,5 @@ build-commands:
 - make
 install-commands:
 - make install
-- install -d "$DESTDIR/etc" ; echo "/lib:/lib64:/usr/lib:/usr/lib64" >> "$DESTDIR/etc/ld-musl-$MORPH_ARCH.path"
+- install -d "$DESTDIR$PREFIX/bin" ; cd "$DESTDIR$PREFIX/bin" ; ln -s ../../lib/ld-musl* ldd
+- install -d "$DESTDIR/etc" ; echo "/lib:/lib64:/usr/lib64:/usr/lib" >> "$DESTDIR/etc/ld-musl-$MORPH_ARCH.path"

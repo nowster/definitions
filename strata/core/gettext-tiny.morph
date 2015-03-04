@@ -1,0 +1,6 @@
+name: gettext-tiny
+kind: chunk
+build-commands:
+- make prefix=$PREFIX
+install-commands:
+- make prefix=$PREFIX install

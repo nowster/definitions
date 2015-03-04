@@ -1,0 +1,17 @@
+name: openssl-new
+kind: chunk
+max-jobs: 1
+configure-commands:
+- sed -i -e 's,^LIBNAMES=\\(.*\\) padlock \\(.*\\),LIBNAMES=\\1 \\2,g' engines/Makefile
+- |
+  if [ "$(uname -m)" = "ppc64" ]; then
+      sh ./Configure linux-ppc64 --openssldir=/etc/ssl --prefix="${PREFIX-/usr}" --libdir=lib shared
+  else
+      sed -i -e 's/DTERMIO /DTERMIOS /' Configure
+      ./config --openssldir=/etc/ssl --prefix="${PREFIX-/usr}" --libdir=lib shared
+  fi
+build-commands:
+- sed -i -e 's/defined(linux)/0/'  ./crypto/ui/ui_openssl.c
+- make
+install-commands:
+- make INSTALL_PREFIX="$DESTDIR" install_sw
