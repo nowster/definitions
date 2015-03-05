@@ -1,0 +1,57 @@
+name: cpe-wrt
+kind: stratum
+description: a CPE router strata based on OpenWrt
+build-depends:
+  - morph: strata/lua.morph
+  - morph: strata/foundation.morph
+  - morph: strata/connectivity.morph
+chunks:
+- name: json-c
+  repo: upstream:json-c
+  ref: ec4879ac5b502ae81f6b73450b960ede11ad2560
+  unpetrify-ref: baserock/morph
+  build-depends: []
+- name: odhcp6c
+  repo: upstream:codhcp6c
+  ref: 8d9b60fb496000988f3633951f2e30380fc2de50
+  unpetrify-ref:
+  build-depends: []
+- name: libubox
+  repo: upstream:libubox
+  ref: ca6d5472056ceee4b8ab320167e0ae8155a95985
+  unpetrify-ref:
+  build-depends:
+  - json-c
+- name: uci
+  repo: upstream:uci
+  ref: 790d30606d545956a64f183c3199f472a70a6385
+  unpetrify-ref:
+  build-depends:
+  - libubox
+- name: ubus
+  repo: upstream:ubus
+  ref: 2d660c519d2fcff95248da9f4fd9b37d61f9eb09
+  unpetrify-ref:
+  build-depends:
+  - libubox
+- name: odhcpd
+  repo: upstream:odhcpd
+  ref: 721db56281dba79158470d7f69ccc7577f11fbb6
+  unpetrify-ref:
+  build-depends:
+  - uci
+- name: ubox
+  repo: upstream:ubox
+  ref: 1dce0407268937cdf37b9c0643632e6c31f5792a
+  unpetrify-ref:
+  build-depends:
+  - ubus
+  - uci
+- name: firewall3
+  repo: upstream:firewall3
+  ref: 165029cb8c0f1545628f44143aec965e64cef021
+  unpetrify-ref:
+  build-depends:
+  - ubus
+  - uci
+
