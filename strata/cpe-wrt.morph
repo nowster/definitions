@@ -54,4 +54,21 @@ chunks:
   build-depends:
   - ubus
   - uci
-
+- name: fstools
+  morph: strata/cpe-wrt/fstools.morph
+  repo: upstream:fstools
+  ref: 1c1bfa053103f7783167d2ab272fb11331f87681
+  unpetrify-ref:
+  build-depends:
+  - libubox
+  - uci
+- name: netifd
+  morph: strata/cpe-wrt/netifd.morph
+  repo: upstream:netifd
+  ref: 4d84111e1014c817653db92bcd8024ff1935b6be
+  unpetrify-ref:
+  build-depends:
+  - json-c
+  - libubox
+  - uci
+  - ubus

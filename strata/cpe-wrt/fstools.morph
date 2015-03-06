@@ -1,0 +1,5 @@
+name: fstools
+kind: chunk
+
+pre-configure-commands:
+- sed -i "s/-Werror//" CMakeLists.txt
