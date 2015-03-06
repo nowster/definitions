@@ -72,3 +72,9 @@ chunks:
   - libubox
   - uci
   - ubus
+- name: mtd
+  morph: strata/openwrt/mtd.morph
+  repo: upstream:mtd-utils
+  ref: 92686f212c9a4e16891c6a3c57629cbf4f0f8360
+  unpetrify-ref:
+  build-depends: []
