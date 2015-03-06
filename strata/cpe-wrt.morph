@@ -72,6 +72,15 @@ chunks:
   - libubox
   - uci
   - ubus
+- name: rpcd
+  morph: strata/openwrt/rpcd.morph
+  repo: upstream:rpcd
+  ref: 805e8ce8918237d93baafa53413c5c4ef0380504
+  unpetrify-ref:
+  build-depends:
+  - json-c
+  - ubus
+  - uci
 - name: mtd
   morph: strata/openwrt/mtd.morph
   repo: upstream:mtd-utils
