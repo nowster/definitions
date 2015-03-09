@@ -87,3 +87,10 @@ chunks:
   ref: 92686f212c9a4e16891c6a3c57629cbf4f0f8360
   unpetrify-ref:
   build-depends: []
+- name: procd
+  morph: strata/cpe-wrt/procd.morph
+  repo: file:///src/workspace/procd
+  ref: 6b9082f35f816aabaeac27df5cc12aa5b835fcb9
+  unpetrify-ref:
+  build-depends:
+  - ubus
