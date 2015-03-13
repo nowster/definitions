@@ -1,0 +1,31 @@
+name: base-files
+kind: chunk
+
+#build-commands:
+#- |
+#  export TOPDIR="../.."
+#  export INCLUDE_DIR="TOPDIR/include"
+#  cd package/base-files && make
+
+install-commands:
+# FHS directories
+- |
+  cp -r package/base-files/files/* "$DESTDIR"/
+
+# procd files
+-  install package/system/procd/files/hotplug.json "$DESTDIR"/etc/
+-  install package/system/procd/files/hotplug-preinit.json "$DESTDIR"/etc/
+-  install package/system/procd/files/reload_config "$DESTDIR"/sbin/
+-  install package/system/procd/files/procd.sh "$DESTDIR"/lib/functions/
+
+#netifd
+- |
+  cp -r package/network/config/netifd/files/* "$DESTDIR"/
+
+#ubox
+- |
+  cp -r package/system/ubox/files/* "$DESTDIR"/etc/init.d/log
+
+#ubox
+- |
+  cp -r package/system/uci/files/* "$DESTDIR"/

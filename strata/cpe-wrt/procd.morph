@@ -3,4 +3,11 @@ kind: chunk
 
 pre-configure-commands:
 - sed -i "s/-Werror//" CMakeLists.txt
-- sed -i "s/#include <json/#include <json-c/" service/validate.c plug/hotplug.c
+- sed -i "s/#include <json>/#include <json-c>/" service/validate.c plug/hotplug.c
+
+build-commands:
+- cmake -DCMAKE_INSTALL_PREFIX=/
+- make
+
+install-commands:
+- make install

@@ -1,0 +1,5 @@
+name: ubox
+kind: chunk
+
+install-commands:
+- make DESTDIR="$DESTDIR"  install

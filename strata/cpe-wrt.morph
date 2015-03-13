@@ -94,3 +94,11 @@ chunks:
   unpetrify-ref:
   build-depends:
   - ubus
+- name: base-files
+  morph: strata/cpe-wrt/base-files.morph
+  repo: git://git.openwrt.org/openwrt.git
+  ref: HEAD
+  unpetrify-ref:
+  build-depends:
+  - netifd
+  - procd
