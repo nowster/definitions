@@ -102,7 +102,7 @@ chunks:
   - ubus
 - name: base-files
   morph: strata/cpe-wrt/base-files.morph
-  repo: git://git.openwrt.org/openwrt.git
+  repo: upstream:openwrt/openwrt
   ref: HEAD
   unpetrify-ref:
   build-depends:

@@ -29,3 +29,6 @@ install-commands:
 #ubox
 - |
   cp -r package/system/uci/files/* "$DESTDIR"/
+
+#lock symlink
+- ln -s busybox "$DESTDIR"/bin/lock

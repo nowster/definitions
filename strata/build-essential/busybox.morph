@@ -55,6 +55,8 @@ configure-commands:
 - sed -e 's/# CONFIG_FEATURE_COMPRESS_BBCONFIG is not set/CONFIG_FEATURE_COMPRESS_BBCONFIG=y/' -i .config
 - sed -e 's/# CONFIG_FEATURE_MOUNT_HELPERS is not set/CONFIG_FEATURE_MOUNT_HELPERS=y/' -i .config
 
+# Add lock for OpenWrt
+- sed -e 's/# CONFIG_FLASH_LOCK is not set/CONFIG_FLASH_LOCK=y/' -i .config
 
 build-commands:
 - make
