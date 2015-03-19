@@ -1,0 +1,8 @@
+name: iwinfo
+kind: chunk
+
+build-commands:
+- make
+
+install-commands:
+- make install

@@ -4,5 +4,13 @@ kind: chunk
 pre-configure-commands:
 - sed -i "s/-Werror//" CMakeLists.txt
 - sed -i "s/netifd\s\${LIBS}/netifd \${LIBS} \${LIBNL_LIBRARIES} \${JSONC_LIBARIES}/" CMakeLists.txt
-- sed -i "s/#include\s\"config.h\"/#include \"config.h\"\n#include \"bits.h\"/" handler.h
-- sed -i "s/SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS \"\")/SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS \"\")\nINCLUDE(FindPkgConfig)\nPKG_CHECK_MODULES(JSONC json-c)\nIF(JSONC_FOUND)\n  ADD_DEFINITIONS(-DJSONC)\n  INCLUDE_DIRECTORIES(${JSONC_INCLUDE_DIRS})\nENDIF()\n\nPKG_CHECK_MODULES(LIBNL libnl-3.0)\nINCLUDE_DIRECTORIES(${LIBNL_INCLUDE_DIRS})\n/" CMakeLists.txt
+- sed -i "s/#include\s\"config.h\"/#include \"config.h\"\n#include \"json-c\/bits.h\"/" handler.h
+- sed -i "s/#include <json/#include <json-c/" handler.c handler.h
+- sed -i "s/SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS \"\")/SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS \"\")\nINCLUDE(FindPkgConfig)\nPKG_CHECK_MODULES(JSONC json-c)\nIF(JSONC_FOUND)\n  ADD_DEFINITIONS(-DJSONC)\n  INCLUDE_DIRECTORIES(${JSONC_INCLUDE_DIRS})\nENDIF()\n\nPKG_CHECK_MODULES(LIBNL libnl-3.0)\nINCLUDE_DIRECTORIES(\${LIBNL_INCLUDE_DIRS})\n/" CMakeLists.txt
+
+build-commands:
+- cmake -DCMAKE_INSTALL_PREFIX=$PREFIX
+- make VERBOSE=1
+
+install-commands:
+- make install

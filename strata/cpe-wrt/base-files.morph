@@ -1,11 +1,10 @@
 name: base-files
 kind: chunk
 
-#build-commands:
-#- |
-#  export TOPDIR="../.."
-#  export INCLUDE_DIR="TOPDIR/include"
-#  cd package/base-files && make
+# "export -n" is not supported
+
+pre-configure-commands:
+- sed -i "s/export -n/export/" package/base-files/files/lib/functions/preinit.sh
 
 install-commands:
 # FHS directories
@@ -18,17 +17,17 @@ install-commands:
 -  install package/system/procd/files/reload_config "$DESTDIR"/sbin/
 -  install package/system/procd/files/procd.sh "$DESTDIR"/lib/functions/
 
-#netifd
+# netifd
 - |
   cp -r package/network/config/netifd/files/* "$DESTDIR"/
 
-#ubox
+# ubox
 - |
   cp -r package/system/ubox/files/* "$DESTDIR"/etc/init.d/log
 
-#ubox
+# uci
 - |
   cp -r package/system/uci/files/* "$DESTDIR"/
 
-#lock symlink
+# lock symlink
 - ln -s busybox "$DESTDIR"/bin/lock

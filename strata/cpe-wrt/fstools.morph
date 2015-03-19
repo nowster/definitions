@@ -3,3 +3,10 @@ kind: chunk
 
 pre-configure-commands:
 - sed -i "s/-Werror//" CMakeLists.txt
+
+build-commands:
+- cmake -DCMAKE_INSTALL_PREFIX=/
+- make
+
+install-commands:
+- make install

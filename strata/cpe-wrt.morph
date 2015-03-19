@@ -28,12 +28,14 @@ chunks:
   - json-c
   - lua
 - name: uci
+  morph: strata/cpe-wrt/uci.morph
   repo: upstream:openwrt/uci
   ref: 790d30606d545956a64f183c3199f472a70a6385
   unpetrify-ref:
   build-depends:
   - libubox
 - name: ubus
+  morph: strata/cpe-wrt/ubus.morph
   repo: upstream:openwrt/ubus
   ref: 2d660c519d2fcff95248da9f4fd9b37d61f9eb09
   unpetrify-ref:
@@ -47,6 +49,7 @@ chunks:
   build-depends:
   - uci
 - name: ubox
+  morph: strata/cpe-wrt/ubox.morph
   repo: upstream:openwrt/ubox
   ref: 1dce0407268937cdf37b9c0643632e6c31f5792a
   unpetrify-ref:
@@ -54,6 +57,7 @@ chunks:
   - ubus
   - uci
 - name: firewall3
+  morph: strata/cpe-wrt/firewall3.morph
   repo: upstream:openwrt/firewall3
   ref: 165029cb8c0f1545628f44143aec965e64cef021
   unpetrify-ref:
@@ -78,15 +82,6 @@ chunks:
   - libubox
   - uci
   - ubus
-- name: rpcd
-  morph: strata/cpe-wrt/rpcd.morph
-  repo: upstream:openwrt/rpcd
-  ref: 805e8ce8918237d93baafa53413c5c4ef0380504
-  unpetrify-ref:
-  build-depends:
-  - json-c
-  - ubus
-  - uci
 - name: mtd
   morph: strata/cpe-wrt/mtd.morph
   repo: upstream:mtd-utils
@@ -108,3 +103,20 @@ chunks:
   build-depends:
   - netifd
   - procd
+#- name: iwinfo
+#  morph: strata/cpe-wrt/iwinfo.morph
+#  repo: git://git.openwrt.org/project/iwinfo.git
+# ref: HEAD
+#  unpetrify-ref:
+#  build-depends:
+#  - uci
+#- name: rpcd
+#  morph: strata/cpe-wrt/rpcd.morph
+#  repo: upstream:openwrt/rpcd
+#  ref: 805e8ce8918237d93baafa53413c5c4ef0380504
+#  unpetrify-ref:
+#  build-depends:
+#  - json-c
+#  - iwinfo
+#  - ubus
+#  - uci

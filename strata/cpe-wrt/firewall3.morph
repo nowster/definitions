@@ -12,7 +12,4 @@ post-install-commands:
 - |
   install -d "$DESTDIR/sbin"
   cd "$DESTDIR/sbin"
-  ln -s ../usr/sbin/kmodloader kmodloader
-  ln -s ../usr/sbin/lsbloader lsbloader
-  ln -s ../usr/sbin/validate_data validate_data
-  ln -s ../usr/sbin/logd logd
+  ln -s ../usr/sbin/fw3 firewall3
