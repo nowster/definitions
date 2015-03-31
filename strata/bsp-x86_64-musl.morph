@@ -1,0 +1,26 @@
+name: bsp-x86_64-musl
+kind: stratum
+description: The set of platform specific components required for booting a 64-bit
+  x86 based system.
+build-depends:
+- morph: strata/coreutils-common-musl.morph
+chunks:
+- name: linux-x86-64-generic
+  morph: strata/bsp-x86_64-generic/linux-x86-64-generic.morph
+  repo: upstream:linux
+  ref: bfa76d49576599a4b9f9b7a71f23d73d6dcff735
+  unpetrify-ref: v3.19
+  build-depends: []
+- name: nasm
+  morph: strata/bsp-x86_64-generic/nasm.morph
+  repo: upstream:nasm
+  ref: 78bdad3d14fb875d5f2062957e326ba2a9e4ccb0
+  unpetrify-ref: baserock/morph
+  build-depends: []
+- name: syslinux
+  morph: strata/bsp-x86_64-generic/syslinux.morph
+  repo: file:///src/workspace/syslinux
+  ref: 73d9cd6336489ee98efca35e9e94ff64feb952e1
+  unpetrify-ref: baserock/morph
+  build-depends:
+  - nasm

@@ -1,0 +1,19 @@
+name: base-system-x86_64-musl
+kind: system
+description: The set of strata required to have a minimal system for a 64-bit x86
+  system.
+arch: x86_64
+strata:
+- name: build-essential-musl
+  morph: strata/build-essential-musl.morph
+- name: core-musl
+  morph: strata/core-musl.morph
+- name: foundation-musl
+  morph: strata/foundation-musl.morph
+- name: bsp-x86_64-musl
+  morph: strata/bsp-x86_64-musl.morph
+configuration-extensions:
+- set-hostname
+- nfsboot
+- install-files
+- busybox-init

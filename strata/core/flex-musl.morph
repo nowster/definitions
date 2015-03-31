@@ -1,4 +1,4 @@
-name: flex
+name: flex-musl
 kind: chunk
 configure-commands:
 - ./configure --prefix="$PREFIX"
