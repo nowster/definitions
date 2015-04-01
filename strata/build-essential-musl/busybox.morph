@@ -54,7 +54,6 @@ configure-commands:
 - sed -e 's/CONFIG_IFCONFIG=y.*/# CONFIG_IFCONFIG is not set/' -i .config
 - sed -e 's/CONFIG_IPLINK=y.*/# CONFIG_IPLINK is not set/' -i .config
 - sed -e 's/CONFIG_IPROUTE=y.*/# CONFIG_IPROUTE is not set/' -i .config
-- sed -e 's/CONFIG_INIT=y.*/# CONFIG_INIT is not set/' -i .config
 - sed -e 's/CONFIG_INIT_TERMINAL_TYPE=y.*/CONFIG_INIT_TERMINAL_TYPE=""/' -i .config
 - sed -e 's/CONFIG_LOSETUP=y.*/# CONFIG_LOSETUP is not set/' -i .config
 - sed -e 's/CONFIG_LSUSB=y.*/# CONFIG_LSUSB is not set/' -i .config
