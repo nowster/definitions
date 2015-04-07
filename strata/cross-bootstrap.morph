@@ -72,6 +72,11 @@ chunks:
   unpetrify-ref: baserock/morph
   build-depends:
   - six
+- name: pylru
+  repo: upstream:python-packages/pylru
+  ref: 221dd259f5c34562c835611d1cf62384b9019da4
+  unpetrify-ref: master
+  build-depends: []
 - name: morph
   repo: baserock:baserock/morph
   ref: b3191c34625bc014983f63342fb509b354911066
@@ -81,6 +86,7 @@ chunks:
   - cmdtest
   - python-coverage-test-runner
   - pyfilesystem
+  - pylru
 - name: rsync
   morph: strata/cross-bootstrap/rsync.morph
   repo: upstream:rsync
