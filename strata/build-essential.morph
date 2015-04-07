@@ -50,7 +50,7 @@ products:
 chunks:
 - name: stage1-binutils
   morph: strata/build-essential/stage1-binutils.morph
-  repo: upstream:binutils-redhat
+  repo: github:mossmaurice/binutils-redhat
   ref: ad25e90cfdee4fc678d7c159f00d2d015d55c175
   unpetrify-ref: baserock/build-essential
   build-mode: bootstrap
@@ -104,7 +104,7 @@ chunks:
 
 - name: stage2-binutils
   morph: strata/build-essential/stage2-binutils.morph
-  repo: upstream:binutils-redhat
+  repo: github:mossmaurice/binutils-redhat
   ref: ad25e90cfdee4fc678d7c159f00d2d015d55c175
   unpetrify-ref: baserock/build-essential
   build-depends:
@@ -286,7 +286,7 @@ chunks:
 
 - name: binutils
   morph: strata/build-essential/binutils.morph
-  repo: upstream:binutils-redhat
+  repo: github:mossmaurice/binutils-redhat
   ref: ad25e90cfdee4fc678d7c159f00d2d015d55c175
   unpetrify-ref: baserock/build-essential
   build-depends:
