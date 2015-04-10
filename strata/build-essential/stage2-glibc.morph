@@ -58,6 +58,7 @@ install-commands:
     ln -s "$PREFIX/lib/ld.so.1" \
           "$DESTDIR/lib64/ld.so.1" ;;
   *)
-    loader=$(basename $(ls "$DESTDIR$PREFIX"/lib/ld-linux*))
+    [ -z $loader ] && loader=$(basename $(ls "$DESTDIR$PREFIX"/lib/ld.so*))
+    [ -z $loader ] && ( echo "Bug in stage2-glibc ld.so symlinks" ; exit 1 )
     ln -s "$PREFIX/lib/$loader" "$DESTDIR/lib/$loader"
   esac
