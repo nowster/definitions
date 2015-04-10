@@ -78,8 +78,8 @@ chunks:
   unpetrify-ref: master
   build-depends: []
 - name: morph
-  repo: github:mossmaurice/morph
-  ref: 9becf8309148db615ce8e3ca97938d8bcb70ef8d
+  repo: github:nowster/morph
+  ref: fb24a32d7cbfd498bdee58472d6e1e87cd0a5733
   unpetrify-ref: master
   build-depends:
   - cliapp
