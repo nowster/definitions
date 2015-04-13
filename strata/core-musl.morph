@@ -37,7 +37,7 @@ chunks:
 - name: mini-utils
   morph: strata/core/mini-utils.morph
   repo: file:///src/workspace/mini-utils
-  ref: 934bfa907d278bc19172938d7c09379fd8d997f9
+  ref: fc5ed3c6cfdbe7f5dad7e534dd15e62fbe44db37
   unpetrify-ref: master
   build-depends: []
 - name: ncurses

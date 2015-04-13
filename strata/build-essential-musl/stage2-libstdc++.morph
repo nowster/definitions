@@ -1,5 +1,12 @@
 name: stage2-libstdc++
 kind: chunk
+
+pre-configure-commands:
+- |
+  case "$MORPH_ARCH" in
+      mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
+  esac 
+
 configure-commands:
 - mkdir o
 
@@ -13,21 +20,22 @@ configure-commands:
 #     directory.
 - |
   export STAGE2_SYSROOT="$(dirname $(pwd))"
+  export TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
   # -fPIC must be given, otherwise it will not be possible to create
   # shared libraries linked to libstdc++
   export CPPFLAGS="--sysroot=$STAGE2_SYSROOT -fPIC"
   export LDFLAGS="--sysroot=$STAGE2_SYSROOT"
   cd o && ../libstdc++-v3/configure                           \
             --build=$(sh ../config.guess)                     \
-            --host=x86_64-linux-musl                          \
-            --target=x86_64-linux-musl                        \
+            --host=$TARGET_STAGE1                             \
+            --target=$TARGET_STAGE1                           \
             --prefix="$PREFIX"                                \
             --disable-nls                                     \
             --disable-shared                                  \
             --disable-multilib                                \
     `# [1]` --disable-libstdcxx-threads                       \
     `# [2]` --disable-libstdcxx-pch                           \
-    `# [3]` --with-gxx-include-dir=/tools/x86_64-linux-musl/include/c++/4.9.2
+    `# [3]` --with-gxx-include-dir="/tools/$TARGET_STAGE1/include/c++/4.9.2"
 
 build-commands:
 - cd o && make

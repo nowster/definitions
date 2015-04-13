@@ -7,4 +7,22 @@ build-commands:
 install-commands:
 - make install
 - install -d "$DESTDIR$PREFIX/bin" ; cd "$DESTDIR$PREFIX/bin" ; ln -s ../../lib/ld-musl* ldd
-- install -d "$DESTDIR/etc" ; echo "/lib:/lib64:/usr/lib64:/usr/lib" >> "$DESTDIR/etc/ld-musl-$MORPH_ARCH.path"
+- |
+  case "$MORPH_ARCH" in
+      armv7b|armv7l|armv7lhf)
+          ARCH="arm" ;;
+      x86_32)                                     
+          ARCH="i386" ;;             
+      x86_64)                        
+          ARCH="x86_64" ;;                                                
+      ppc64)              
+          ARCH="powerpc" ;;
+      mips*)                                                                         
+          ARCH="mips" ;;                          
+      *)       
+          echo "Error: unsupported Morph architecture: $MORPH_ARCH" >&2
+          exit 1 
+  esac
+  echo "/lib:/lib64:/usr/lib64:/usr/lib" >> "ld-musl-$ARCH.path"
+  install -d "$DESTDIR/etc"
+  install "ld-musl-$ARCH.path" "$DESTDIR/etc/ld-musl-$ARCH.path"

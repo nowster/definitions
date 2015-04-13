@@ -1,6 +1,12 @@
 name: stage2-gcc
 kind: chunk
 
+pre-configure-commands:
+- |
+  case "$MORPH_ARCH" in
+      mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
+  esac
+
 configure-commands:
 - mkdir o
 
@@ -27,6 +33,8 @@ configure-commands:
                             --with-fpu=vfpv3-d16 \
                             --with-float=hard" ;;
       armv7*)   ARCH_FLAGS="--with-arch=armv7-a" ;;
+      mips64*)  ARCH_FLAGS="--with-arch=mips64 \
+                            --with-abi=64" ;;
   esac
   TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
   export STAGE2_SYSROOT="$(dirname $(pwd))"
@@ -71,11 +79,10 @@ install-commands:
 # gcc/config/i386/t-linux64 and this might break things, so for now we
 # tolerate the inconsistency.
 - |
-  if [ "$(echo $TARGET | cut -c -6)" = "x86_64" ]; then
-    libdir=lib64
-  else
-    libdir=lib
-  fi
+  case "$TARGET" in
+    x86_64* | mips64*) libdir=lib64 ;;
+    *)                 libdir=lib ;;
+  esac
 
   install -d "$DESTDIR/lib"
   ln -s "$PREFIX/$libdir/libgcc_s.so" "$DESTDIR/lib/"

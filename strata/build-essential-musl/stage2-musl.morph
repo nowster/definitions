@@ -8,12 +8,13 @@ configure-commands:
 #   4. Force configuration values of certain things that can't be detected
 #      in a cross-compile.
 - |
+  TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`; \
   export CFLAGS="-O2 $CFLAGS"; export CXX=false; \
   ./configure \
-    CROSS_COMPILE=x86_64-linux-musl- \
+    CROSS_COMPILE="$TARGET_STAGE1-" \
     $ARCH_FLAGS \
     --prefix="$PREFIX" \
-    --host=x86_64-linux-musl \
+    --host=$TARGET_STAGE1 \
     --disable-gcc-wrapper \
     `# [1]` --libdir="$PREFIX/lib" \
     `# [2]` --with-headers="$(pwd)/../../$PREFIX/include" \
@@ -26,23 +27,28 @@ build-commands:
 
 install-commands:
 - make install_root="$DESTDIR" localtime=UTC install
-- sh stage2-musl-fix-specs
+- export TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`; sh stage2-musl-fix-specs
 
 # Install a symlink for the program interpreter (ld.so) so that binaries
 # built in stage 3 before the stage 3 musl is built can use it.        
 # sysdeps/unix/sysv/linux/configure.      
 - install -d $DESTDIR/lib           
 - |                      
-  cpu=$(echo $TARGET | cut -d '-' -f 1)
-  case "$cpu" in                       
-  x86_64)       
-    cd "$DESTDIR$PREFIX"/lib ; ln -s libc.so ld-musl-x86_64.so.1 ;;
-  ppc64)                                          
-    install -d "$DESTDIR/lib64"
-    ln -s "$PREFIX/lib/ld64.so.1" \
-          "$DESTDIR/lib64/ld64.so.1" ;;
-  *)                                   
-    loader=$(basename $(ls "$DESTDIR$PREFIX"/lib/ld-musl*))
-    [ -z $loader ] && ( echo "Bug in stage2-musl ld.so symlinks" ; exit 1 )
-    ln -s "$PREFIX/lib/$loader" "$DESTDIR/lib/$loader"      
+  case "$MORPH_ARCH" in
+      armv7b|armv7l|armv7lhf)
+          ARCH="arm" ;;
+      x86_32)
+          ARCH="i386" ;;
+      x86_64)
+          ARCH="x86_64" ;;
+      ppc64)
+          ARCH="powerpc" ;;
+      mips*)
+          ARCH="mips" ;;
+      *)
+          echo "Error: unsupported Morph architecture: $MORPH_ARCH" >&2
+          exit 1
   esac
+  loader=$(basename $(ls "$DESTDIR$PREFIX"/lib/libc.so))
+  [ -z $loader ] && ( echo "Bug in stage2-musl ld.so symlinks" ; exit 1 )
+   cd "$DESTDIR$PREFIX"/lib ; ln -s $loader ld-musl-$ARCH.so.1
