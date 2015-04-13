@@ -5,7 +5,7 @@ build-depends:
 chunks:
 - name: llvm
   morph: strata/llvm-common/llvm.morph
-  repo: upstream:llvm
-  ref: a4cf325e41fca33c7ce7deef39a7bcf25fb38266
-  unpetrify-ref: release_35
+  repo: github:nowster/llvm
+  ref: bfa1217d06f4ef320731d618e031a2825f959c7a
+  unpetrify-ref: a4cf325e41fca33c7ce7deef39a7bcf25fb38266
   build-depends: []
