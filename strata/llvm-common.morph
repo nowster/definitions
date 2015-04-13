@@ -6,6 +6,6 @@ chunks:
 - name: llvm
   morph: strata/llvm-common/llvm.morph
   repo: upstream:llvm
-  ref: a93239b7c6f0d78cb8836768c3ffbc39fb15b79f
-  unpetrify-ref: release_33
+  ref: a4cf325e41fca33c7ce7deef39a7bcf25fb38266
+  unpetrify-ref: release_35
   build-depends: []
