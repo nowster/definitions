@@ -36,7 +36,7 @@ chunks:
   build-depends: []
 - name: mini-utils
   morph: strata/core/mini-utils.morph
-  repo: upstream:mini-utils
+  repo: baserock:baserock/mini-utils
   ref: 6ca6ac97b9e1b17bebf49d34260927efe58b314e
   unpetrify-ref: master
   build-depends: []
