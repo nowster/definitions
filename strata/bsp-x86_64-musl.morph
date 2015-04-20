@@ -19,8 +19,8 @@ chunks:
   build-depends: []
 - name: syslinux
   morph: strata/bsp-x86_64-generic/syslinux.morph
-  repo: file:///src/workspace/syslinux
-  ref: 73d9cd6336489ee98efca35e9e94ff64feb952e1
-  unpetrify-ref: baserock/morph
+  repo: upstream:syslinux
+  ref: de528dd1d9e1aa53cb484fe32706f9c8e4c2763c
+  unpetrify-ref: baserock/4.06-musl
   build-depends:
   - nasm

@@ -79,9 +79,9 @@ chunks:
   build-depends: []
 - name: openssh
   morph: strata/foundation/openssh-musl.morph
-  repo: file:///src/workspace/openssh-git
-  ref: 7e02d01ea76505e7fb33db48b8fc67f3b6f6e99b
-  unpetrify-ref: baserock/morph-musl
+  repo: upstream:openssh-git
+  ref: fe374db43db86b0a16ded2520510553edd378ab4
+  unpetrify-ref: baserock/6.7-musl
   build-depends: []
 - name: tbdiff
   morph: strata/foundation/tbdiff.morph

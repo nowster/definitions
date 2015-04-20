@@ -34,8 +34,8 @@ description: |
 chunks:
 - name: stage1-binutils-musl
   morph: strata/build-essential-musl/stage1-binutils.morph
-  repo: file:///src/workspace/binutils-redhat
-  ref: 090295d0519c747c989eb628e099128d6fb26f33
+  repo: upstream:binutils-redhat
+  ref: b1d3b01332ae49a60ff5d6bf53d3a5b1805769c8
   unpetrify-ref: baserock/build-essential
   build-depends: []
   build-mode: bootstrap
@@ -43,8 +43,8 @@ chunks:
 
 - name: stage1-gcc-musl
   morph: strata/build-essential-musl/stage1-gcc.morph
-  repo: file:///src/workspace/gcc-tarball
-  ref: 164c79f856e26a0f7577f91a8cc32d61b848b935
+  repo: upstream:gcc-tarball
+  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -64,8 +64,8 @@ chunks:
 
 - name: stage2-musl
   morph: strata/build-essential-musl/stage2-musl.morph
-  repo: file:///src/workspace/musl
-  ref: d8b6bef220f526528f13207108ed8a89dc348975
+  repo: upstream:musl
+  ref: c7ac6a91178945b79dbbce5ed09e55062e67f7db
   unpetrify-ref: baserock/1.1.6
   build-depends:
   - stage1-binutils-musl
@@ -76,8 +76,8 @@ chunks:
 
 - name: stage2-libstdc++-musl
   morph: strata/build-essential-musl/stage2-libstdc++.morph
-  repo: file:///src/workspace/gcc-tarball
-  ref: 164c79f856e26a0f7577f91a8cc32d61b848b935
+  repo: upstream:gcc-tarball
+  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -88,8 +88,8 @@ chunks:
 
 - name: stage2-binutils-musl
   morph: strata/build-essential-musl/stage2-binutils.morph
-  repo: file:///src/workspace/binutils-redhat
-  ref: 090295d0519c747c989eb628e099128d6fb26f33
+  repo: upstream:binutils-redhat
+  ref: b1d3b01332ae49a60ff5d6bf53d3a5b1805769c8
   unpetrify-ref: baserock/build-essential
   build-depends:
   - stage1-binutils-musl
@@ -100,8 +100,8 @@ chunks:
 
 - name: stage2-gcc-fixed-headers-musl
   morph: strata/build-essential-musl/stage2-gcc-fixed-headers.morph
-  repo: file:///src/workspace/gcc-tarball
-  ref: 164c79f856e26a0f7577f91a8cc32d61b848b935
+  repo: upstream:gcc-tarball
+  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -112,8 +112,8 @@ chunks:
 
 - name: stage2-gcc-musl
   morph: strata/build-essential-musl/stage2-gcc.morph
-  repo: file:///src/workspace/gcc-tarball
-  ref: 164c79f856e26a0f7577f91a8cc32d61b848b935
+  repo: upstream:gcc-tarball
+  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -225,8 +225,8 @@ chunks:
 
 - name: musl
   morph: strata/build-essential-musl/musl.morph
-  repo: file:///src/workspace/musl
-  ref: d8b6bef220f526528f13207108ed8a89dc348975
+  repo: upstream:musl
+  ref: c7ac6a91178945b79dbbce5ed09e55062e67f7db
   unpetrify-ref: baserock/1.1.6
   build-depends:
   - stage2-binutils-musl
@@ -242,7 +242,6 @@ chunks:
   - linux-api-headers-musl
 
 - name: zlib-musl
-  morph: strata/build-essential-musl/zlib.morph
   repo: upstream:zlib
   ref: db333af7e9b90a23fd7f9cd8dc128123b34bf698
   unpetrify-ref: baserock/build-essential
@@ -260,8 +259,8 @@ chunks:
 
 - name: binutils-musl
   morph: strata/build-essential-musl/binutils.morph
-  repo: file:///src/workspace/binutils-redhat
-  ref: 090295d0519c747c989eb628e099128d6fb26f33
+  repo: upstream:binutils-redhat
+  ref: b1d3b01332ae49a60ff5d6bf53d3a5b1805769c8
   unpetrify-ref: baserock/build-essential
   build-depends:
   - stage2-binutils-musl
@@ -327,8 +326,8 @@ chunks:
 
 - name: gcc-musl
   morph: strata/build-essential-musl/gcc.morph
-  repo: file:///src/workspace/gcc-tarball
-  ref: 164c79f856e26a0f7577f91a8cc32d61b848b935
+  repo: upstream:gcc-tarball
+  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage2-binutils-musl
