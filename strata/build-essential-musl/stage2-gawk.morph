@@ -1,0 +1,13 @@
+name: stage2-gawk
+kind: chunk
+build-system: autotools
+configure-commands:
+- |
+  export TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
+  export STAGE2_SYSROOT="$(dirname $(pwd))" 
+  export CPPFLAGS="--sysroot=$STAGE2_SYSROOT" 
+  export CXX=false
+  export LDFLAGS="--sysroot=$STAGE2_SYSROOT"
+  ./configure --prefix="$PREFIX" --disable-nls --build=$(sh config.guess) --host=$TARGET_STAGE1
+build-commands:
+- STAGE2_SYSROOT="$(dirname $(pwd))" make

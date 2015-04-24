@@ -1,0 +1,92 @@
+name: foundation-musl
+kind: stratum
+description: Basic userland runtime system
+build-depends:
+- morph: strata/coreutils-common-musl.morph
+chunks:
+- name: attr
+  morph: strata/foundation/attr.morph
+  repo: upstream:attr
+  ref: fdcd484ed6f5df9a2d60ae446c325f12e3d9d0b3
+  unpetrify-ref: baserock/morph-musl
+  build-depends: []
+- name: groff
+  morph: strata/foundation/groff.morph
+  repo: upstream:groff-git
+  ref: 16305a24e67966ace06d55e2a0b98cc0e3127a93
+  unpetrify-ref: 1.22.3
+  build-depends: []
+- name: kmod
+  morph: strata/foundation/kmod.morph
+  repo: upstream:kmod
+  ref: ae58de0fcb4a6528dd365e23d383bbe2eaf2d566
+  unpetrify-ref: v18
+  build-depends: []
+- name: time-zone-database
+  morph: strata/foundation/time-zone-database.morph
+  repo: upstream:tz
+  ref: a0782484f101ac55c916568bc1c490d7761fc904
+  unpetrify-ref: 2015a
+  build-depends: []
+- name: libcap2
+  morph: strata/foundation/libcap2.morph
+  repo: upstream:libcap2
+  ref: 4f7cca1bc9c2a274edb39d351b65747010d3ba7b
+  unpetrify-ref: baserock/morph
+  build-depends:
+  - attr
+- name: libffi
+  morph: strata/foundation/libffi.morph
+  repo: upstream:libffi
+  ref: 77d4586cc47e8f4c02278afbc220145bba0d442b
+  unpetrify-ref: baserock/morph
+  build-depends: []
+- name: pciutils
+  morph: strata/foundation/pciutils.morph
+  repo: upstream:pciutils
+  ref: 27ace7572d430d3a88d3bd4d4594fd6633a4ea50
+  unpetrify-ref: baserock/morph-musl
+  build-depends: []
+- name: glib
+  repo: upstream:glib
+  ref: 4125415e7f4d1213fc7122beac0d91af08e37b28
+  build-depends:
+  - libffi
+- name: linux-pam                              
+  morph: strata/foundation/linux-pam.morph     
+  repo: upstream:linux-pam
+  ref: a3ebc3aeb92ccf413253d934cf14169d1d36b15e
+  unpetrify-ref: baserock/v1.1.8-musl
+  build-depends: []
+- name: lzo
+  morph: strata/foundation/lzo.morph
+  repo: upstream:lzo
+  ref: 5cca83e4d1b0be5825a597ab24ffa6126dc0bc95
+  unpetrify-ref: lzo-2.08
+  build-depends: []
+- name: acl
+  morph: strata/foundation/acl.morph
+  repo: upstream:acl
+  ref: f13e09bd54fd4a501c4952f002ed2752bdd9f93b
+  unpetrify-ref: v2.2.52
+  build-depends:
+  - attr
+- name: e2fsprogs
+  morph: strata/foundation/e2fsprogs-musl.morph
+  repo: upstream:e2fsprogs
+  ref: 6a3741ad293031447b95b88431eafa77401a8987
+  unpetrify-ref: v1.42.12
+  build-depends: []
+- name: openssh
+  morph: strata/foundation/openssh-musl.morph
+  repo: upstream:openssh-git
+  ref: fe374db43db86b0a16ded2520510553edd378ab4
+  unpetrify-ref: baserock/6.7-musl
+  build-depends: []
+- name: tbdiff
+  morph: strata/foundation/tbdiff.morph
+  repo: baserock:baserock/tbdiff
+  ref: 47fb728f2432929868666afc915dbc5a64836c08
+  unpetrify-ref: master
+  build-depends:
+  - attr

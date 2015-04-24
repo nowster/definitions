@@ -1,0 +1,123 @@
+name: busybox
+kind: chunk
+
+configure-commands:
+# Busybox's default config has everything enabled.
+- make defconfig
+
+- sed -e 's|.*UDHCPC_DEFAULT_SCRIPT.*|CONFIG_UDHCPC_DEFAULT_SCRIPT="'"$PREFIX"/share/udhcpc/default.script'"|' -i .config
+- sed -e 's|.*IFUPDOWN_IFSTATE_PATH.*|CONFIG_IFUPDOWN_IFSTATE_PATH="/run/ifstate"|' -i .config
+
+# Avoid dividing applets between $PREFIX/[s]bin and $PREFIX/usr/[s]bin.
+- '[ "$PREFIX" = /usr ] || sed -e ''s/.*INSTALL_NO_USR.*/CONFIG_INSTALL_NO_USR=y/'' -i .config'
+
+# We have GAWK, but in GENIVI baseline we want to get rid of it
+# - sed -e 's/CONFIG_AWK=y.*/# CONFIG_AWK is not set/' -i .config
+
+# Depends on stuff that was removed since eglibc 2.14.
+- sed -e 's/CONFIG_INETD=y.*/# CONFIG_INETD is not set/' -i .config
+
+# Busybox Patch is incompatible enough with GNU Patch that it can't be
+# used for GNULib projects built from Git.
+- sed -e 's/CONFIG_PATCH=y.*/# CONFIG_PATCH is not set/' -i .config
+
+# None of this is needed because we have kmod; and it actually breaks the
+# Linux build because depmod isn't compatible enough with util-linux's.
+- sed -e 's/CONFIG_DEPMOD=y.*/# CONFIG_DEPMOD is not set/' -i .config
+- sed -e 's/CONFIG_INSMOD=y.*/# CONFIG_INSMOD is not set/' -i .config
+- sed -e 's/CONFIG_MODPROBE=y.*/# CONFIG_MODPROBE is not set/' -i .config
+- sed -e 's/CONFIG_MODPROBE_SMALL=y.*/# CONFIG_MODPROBE_SMALL is not set/' -i .config
+- sed -e 's/CONFIG_LSMOD=y.*/# CONFIG_LSMOD is not set/' -i .config
+- sed -e 's/CONFIG_RMMOD=y.*/# CONFIG_RMMOD is not set/' -i .config
+
+# General features that we don't need.
+- sed -e 's/CONFIG_FEATURE_MOUNT_CIFS=y.*/# CONFIG_FEATURE_MOUNT_CIFS is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_EXTRA_COMPAT=y.*/# CONFIG_FEATURE_EXTRA_COMPAT is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_EXTRA_QUIET=y.*/# CONFIG_FEATURE_EXTRA_QUIET is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_INIT_COREDUMPS=y.*/# CONFIG_FEATURE_INIT_COREDUMPS is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_INIT_SCTTY=y.*/# CONFIG_FEATURE_INIT_SCTTY is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_INIT_SYSLOG=y.*/# CONFIG_FEATURE_INIT_SYSLOG is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_INITRD=y.*/# CONFIG_FEATURE_INITRD is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_ROUTE=y.*/# CONFIG_FEATURE_IP_ROUTE is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_USE_INITTAB=y.*/# CONFIG_FEATURE_USE_INITTAB is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_MINIX2=y.*/# CONFIG_FEATURE_MINIX2 is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IFCONFIG_SLIP=y.*/# CONFIG_FEATURE_IFCONFIG_SLIP is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_INETD_RPC=y.*/# CONFIG_FEATURE_INETD_RPC is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_SELINUX=y.*/# CONFIG_FEATURE_SELINUX is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_SYSTEMD=y.*/# CONFIG_FEATURE_SYSTEMD is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_HAVE_RPC=y.*/# CONFIG_FEATURE_HAVE_RPC is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_VI_REGEX_SEARCH=y.*/# CONFIG_FEATURE_VI_REGEX_SEARCH is not set/' -i .config
+- sed -e 's/CONFIG_IFPLUGD=y.*/# CONFIG_IFPLUGD is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_LINK=y.*/# CONFIG_FEATURE_IP_LINK is not set/' -i .config
+- sed -e 's/CONFIG_FSCK_MINIX=y.*/# CONFIG_FSCK_MINIX is not set/' -i .config
+- sed -e 's/CONFIG_HALT=y.*/# CONFIG_HALT is not set/' -i .config
+- sed -e 's/CONFIG_IFCONFIG=y.*/# CONFIG_IFCONFIG is not set/' -i .config
+- sed -e 's/CONFIG_IPLINK=y.*/# CONFIG_IPLINK is not set/' -i .config
+- sed -e 's/CONFIG_IPROUTE=y.*/# CONFIG_IPROUTE is not set/' -i .config
+- sed -e 's/CONFIG_INIT_TERMINAL_TYPE=y.*/CONFIG_INIT_TERMINAL_TYPE=""/' -i .config
+- sed -e 's/CONFIG_LOSETUP=y.*/# CONFIG_LOSETUP is not set/' -i .config
+- sed -e 's/CONFIG_LSUSB=y.*/# CONFIG_LSUSB is not set/' -i .config
+- sed -e 's/CONFIG_LSPCI=y.*/# CONFIG_LSPCI is not set/' -i .config
+- sed -e 's/CONFIG_LZMA=y.*/# CONFIG_LZMA is not set/' -i .config
+- sed -e 's/CONFIG_MKFS_EXT2=y.*/# CONFIG_MKFS_EXT2 is not set/' -i .config
+- sed -e 's/CONFIG_MOUNT_NFS=y.*/# CONFIG_MOUNT_NFS is not set/' -i .config
+- sed -e 's/CONFIG_MKFS_MINIX=y.*/# CONFIG_MKFS_MINIX is not set/' -i .config
+- sed -e 's/CONFIG_PAM=y.*/# CONFIG_PAM is not set/' -i .config
+- sed -e 's/CONFIG_RUNLEVEL=y.*/# CONFIG_RUNLEVEL is not set/' -i .config
+- sed -e 's/CONFIG_SELINUXENABLED=y.*/# CONFIG_SELINUXENABLED is not set/' -i .config
+- sed -e 's/CONFIG_STRINGS=y.*/# CONFIG_STRINGS is not set/' -i .config
+- sed -e 's/CONFIG_UNLZMA=y.*/# CONFIG_UNLZMA is not set/' -i .config
+- sed -e 's/CONFIG_UNXZ=y.*/# CONFIG_UNXZ is not set/' -i .config
+- sed -e 's/CONFIG_XZ=y.*/# CONFIG_XZ is not set/' -i .config
+- sed -e 's/CONFIG_WERROR=y.*/# CONFIG_WERROR is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IFUPDOWN_IP_BUILTIN=y.*/# CONFIG_FEATURE_IFUPDOWN_IP_BUILTIN is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IFUPDOWN_IPV4=y.*/# CONFIG_FEATURE_IFUPDOWN_IPV4 is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IFUPDOWN_IPV6=y.*/# CONFIG_FEATURE_IFUPDOWN_IPV6 is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IFUPDOWN_MAPPING=y.*/# CONFIG_FEATURE_IFUPDOWN_MAPPING is not set/' -i .config
+- sed -e 's/CONFIG_IP=y.*/# CONFIG_IP is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_ADDRESS=y.*/# CONFIG_FEATURE_IP_ADDRESS is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_LINK=y.*/# CONFIG_FEATURE_IP_LINK is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_ROUTE=y.*/# CONFIG_FEATURE_IP_ROUTE is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_TUNNEL=y.*/# CONFIG_FEATURE_IP_TUNNEL is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_RULE=y.*/# CONFIG_FEATURE_IP_RULE is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_SHORT_FORMS=y.*/# CONFIG_FEATURE_IP_SHORT_FORMS is not set/' -i .config
+- sed -e 's/CONFIG_IPADDR=y.*/# CONFIG_IPADDR is not set/' -i .config
+- sed -e 's/CONFIG_IPLINK=y.*/# CONFIG_IPLINK is not set/' -i .config
+- sed -e 's/CONFIG_IPROUTE=y.*/# CONFIG_IPROUTE is not set/' -i .config
+- sed -e 's/CONFIG_IPTUNNEL=y.*/# CONFIG_IPTUNNEL is not set/' -i .config
+- sed -e 's/CONFIG_IPRULE=y.*/# CONFIG_IPRULE is not set/' -i .config
+
+# Now turn on some little bits we do need
+- sed -e 's/# CONFIG_BBCONFIG is not set/CONFIG_BBCONFIG=y/' -i .config
+- sed -e 's/# CONFIG_FEATURE_COMPRESS_BBCONFIG is not set/CONFIG_FEATURE_COMPRESS_BBCONFIG=y/' -i .config
+- sed -e 's/# CONFIG_FEATURE_MOUNT_HELPERS is not set/CONFIG_FEATURE_MOUNT_HELPERS=y/' -i .config
+
+
+build-commands:
+- make
+
+install-commands:
+- |
+  if [ "$PREFIX" = /usr ]; then PREFIX=; fi &&
+    make CONFIG_PREFIX="$DESTDIR$PREFIX" install &&
+    chmod 6755 "$DESTDIR$PREFIX"/bin/busybox
+
+# Set up man environment variables
+- mkdir -p "$DESTDIR"/etc
+- |
+  cat << EOF > "$DESTDIR/etc/profile"
+  # Set default pager to less
+  export MANPAGER='less -R'
+  EOF
+- |
+  cat << EOF > "$DESTDIR/etc/man.conf"
+  # This file is used by man to provide a manpath for those without one by
+  # examining their PATH environment variable.
+  #
+  # Lines beginning with `#' are comments and are ignored. Any combination of
+  # tabs or spaces may be used as `whitespace' separators.
+
+  MANDATORY_MANPATH                       /usr/man
+  MANDATORY_MANPATH                       /usr/share/man
+  MANDATORY_MANPATH                       /usr/local/share/man
+  EOF
