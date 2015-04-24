@@ -1,0 +1,62 @@
+name: gcc
+kind: chunk
+
+pre-configure-commands:
+- |
+  case "$MORPH_ARCH" in
+      mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
+  esac
+
+configure-commands:
+- mkdir o
+
+# Configure flag notes:    
+#   1. An attempt to stop anything going in $PREFIX/lib64 (which doesn't
+#      fully work; we will need to hobble the multilib configuration in
+#      config/i386/t-linux64 if we really want to kill /lib64).
+#   2. Avoid having more than one copy of ZLib in use on the system
+#   3. Multilib does not make sense in Baserock.
+- |
+  case "$MORPH_ARCH" in
+      armv7lhf) ARCH_FLAGS="--with-arch=armv7-a \
+                            --with-cpu=cortex-a9 \
+                            --with-tune=cortex-a9 \
+                            --with-fpu=vfpv3-d16 \
+                            --with-float=hard" ;;
+      armv7*)   ARCH_FLAGS="--with-arch=armv7-a" ;;
+      mips64*)  ARCH_FLAGS="--with-arch=octeon2 \
+                            --with-abi=64" ;;
+  esac
+
+  TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
+  cd o && ../configure                                        \
+            $ARCH_FLAGS                                       \
+            --build=$TARGET_STAGE1                       \
+            --prefix="$PREFIX"                                \
+    `# [1]` --libdir=$PREFIX/lib                              \
+            --disable-bootstrap                               \
+    `# [2]` --with-system-zlib                                \
+    `# [3]` --disable-multilib                                \
+            --disable-libgomp                                 \
+            --disable-libmudflap                              \
+            --disable-nls                                     \
+            --disable-decimal-float                           \
+            --disable-libsanitizer                            \
+            --enable-languages=c,c++,fortran
+
+
+build-commands:
+- |
+  case "$MORPH_ARCH" in
+      armv7*)   sed -i "s/--host=none/--host=armv7a/" o/Makefile
+                sed -i "s/--target=none/--target=armv7a/" o/Makefile ;;
+  esac
+  cd o && make
+
+install-commands:
+- cd o && make DESTDIR="$DESTDIR" install
+- ln -s gcc "$DESTDIR/$PREFIX/bin/cc"
+- >
+  for fortran_alias in f77 f90 f95; do
+      ln -s gfortran "$DESTDIR/$PREFIX/bin/$fortran_alias"
+  done

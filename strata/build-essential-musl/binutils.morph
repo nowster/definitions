@@ -1,0 +1,12 @@
+name: binutils
+kind: chunk
+build-system: autotools
+
+configure-commands:
+- |
+  case "$MORPH_ARCH" in
+      mips64*)  ARCH_FLAGS="--with-arch=octeon2" ;;
+  esac
+  ./configure --prefix="$PREFIX" --disable-nls --disable-werror \
+    $ARCH_FLAGS                                                 \
+    --with-system-zlib
