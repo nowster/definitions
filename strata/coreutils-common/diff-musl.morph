@@ -1,0 +1,8 @@
+name: diff-musl
+kind: chunk
+build-system: autotools
+configure-commands:
+- sed -i -e '/^buildreq="/,/^"/{/rsync/d}' bootstrap.conf
+- sed -i -e '/^buildreq="/,/^"/{/gettext/d}' bootstrap.conf
+- ./bootstrap --skip-po
+- ./configure --prefix="$PREFIX" --disable-gcc-warnings --disable-nls
