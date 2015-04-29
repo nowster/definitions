@@ -26,7 +26,7 @@ configure-commands:
       armv7*)   ARCH_FLAGS="--with-arch=armv7-a" ;;
       mips64*)  ARCH_FLAGS="--with-arch=octeon2 \
                             --with-abi=64" ;;
-      mips*)    ARCH_FLAGS="--with-float=hard" ;;
+      mips*)    ARCH_FLAGS="--with-float=soft" ;;
   esac
 
   TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
