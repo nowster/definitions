@@ -43,8 +43,10 @@ chunks:
 
 - name: stage1-gcc-musl
   morph: strata/build-essential-musl/stage1-gcc.morph
-  repo: upstream:gcc-tarball
-  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
+#  repo: upstream:gcc-tarball
+#  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
+  repo: file:///src/sources/gcc-tarball
+  ref: 280b98a8a7a0155f72611b028e33c141fddc0ef5
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -76,8 +78,10 @@ chunks:
 
 - name: stage2-libstdc++-musl
   morph: strata/build-essential-musl/stage2-libstdc++.morph
-  repo: upstream:gcc-tarball
-  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
+#  repo: upstream:gcc-tarball
+#  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
+  repo: file:///src/sources/gcc-tarball
+  ref: 280b98a8a7a0155f72611b028e33c141fddc0ef5
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -100,8 +104,10 @@ chunks:
 
 - name: stage2-gcc-fixed-headers-musl
   morph: strata/build-essential-musl/stage2-gcc-fixed-headers.morph
-  repo: upstream:gcc-tarball
-  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
+#  repo: upstream:gcc-tarball
+#  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
+  repo: file:///src/sources/gcc-tarball
+  ref: 280b98a8a7a0155f72611b028e33c141fddc0ef5
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -112,8 +118,10 @@ chunks:
 
 - name: stage2-gcc-musl
   morph: strata/build-essential-musl/stage2-gcc.morph
-  repo: upstream:gcc-tarball
-  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
+#  repo: upstream:gcc-tarball
+#  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
+  repo: file:///src/sources/gcc-tarball
+  ref: 280b98a8a7a0155f72611b028e33c141fddc0ef5
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -326,8 +334,10 @@ chunks:
 
 - name: gcc-musl
   morph: strata/build-essential-musl/gcc.morph
-  repo: upstream:gcc-tarball
-  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
+#  repo: upstream:gcc-tarball
+#  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
+  repo: file:///src/sources/gcc-tarball
+  ref: 280b98a8a7a0155f72611b028e33c141fddc0ef5
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage2-binutils-musl
