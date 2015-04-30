@@ -54,6 +54,7 @@ configure-commands:
             --disable-bootstrap                                \
             --disable-nls                                      \
             --disable-multilib                                 \
+            --disable-libmudflap                               \
             --disable-libgomp                                  \
             --disable-libstdcxx-pch                            \
             --disable-libsanitizer                             \

@@ -68,6 +68,7 @@ configure-commands:
     `# [5]` --disable-libvtv                                  \
     `# [5]` --disable-libcilkrts                              \
     `# [5]` --disable-libstdc__-v3                            \
+            --disable-libmudflap                              \
             --enable-languages=c,c++
 
 build-commands:
