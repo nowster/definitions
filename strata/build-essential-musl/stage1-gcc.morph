@@ -67,7 +67,7 @@ configure-commands:
     `# [5]` --disable-libssp                                  \
     `# [5]` --disable-libvtv                                  \
     `# [5]` --disable-libcilkrts                              \
-    `# [5]` --disable-libstdc++-v3                            \
+    `# [5]` --disable-libstdc__-v3                            \
             --enable-languages=c,c++
 
 build-commands:
