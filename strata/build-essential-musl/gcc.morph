@@ -42,7 +42,6 @@ configure-commands:
             --disable-nls                                     \
             --disable-decimal-float                           \
             --disable-libsanitizer                            \
-            --with-avrlibc                                    \
             --enable-languages=c,c++,fortran
 
 
