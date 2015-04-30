@@ -46,7 +46,7 @@ chunks:
 #  repo: upstream:gcc-tarball
 #  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
   repo: file:///src/sources/gcc-tarball
-  ref: 15b02bfc7623b0318307f36dd0730a99196081c0
+  ref: 1c4887b7d91fe08eee6a907a303a50f02de42009
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -81,7 +81,7 @@ chunks:
 #  repo: upstream:gcc-tarball
 #  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
   repo: file:///src/sources/gcc-tarball
-  ref: 15b02bfc7623b0318307f36dd0730a99196081c0
+  ref: 1c4887b7d91fe08eee6a907a303a50f02de42009
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -107,7 +107,7 @@ chunks:
 #  repo: upstream:gcc-tarball
 #  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
   repo: file:///src/sources/gcc-tarball
-  ref: 15b02bfc7623b0318307f36dd0730a99196081c0
+  ref: 1c4887b7d91fe08eee6a907a303a50f02de42009
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -121,7 +121,7 @@ chunks:
 #  repo: upstream:gcc-tarball
 #  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
   repo: file:///src/sources/gcc-tarball
-  ref: 15b02bfc7623b0318307f36dd0730a99196081c0
+  ref: 1c4887b7d91fe08eee6a907a303a50f02de42009
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage1-binutils-musl
@@ -337,7 +337,7 @@ chunks:
 #  repo: upstream:gcc-tarball
 #  ref: 64b6dc020e879808a0c8f2271585e2f5ae45372a
   repo: file:///src/sources/gcc-tarball
-  ref: 15b02bfc7623b0318307f36dd0730a99196081c0
+  ref: 1c4887b7d91fe08eee6a907a303a50f02de42009
   unpetrify-ref: baserock/build-essential-musl
   build-depends:
   - stage2-binutils-musl
