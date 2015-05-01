@@ -54,6 +54,8 @@ configure-commands:
 - sed -e 's/# CONFIG_BBCONFIG is not set/CONFIG_BBCONFIG=y/' -i .config
 - sed -e 's/# CONFIG_FEATURE_COMPRESS_BBCONFIG is not set/CONFIG_FEATURE_COMPRESS_BBCONFIG=y/' -i .config
 - sed -e 's/# CONFIG_FEATURE_MOUNT_HELPERS is not set/CONFIG_FEATURE_MOUNT_HELPERS=y/' -i .config
+- sed -e 's/# CONFIG_LOCK is not set/CONFIG_LOCK=y/' -i .config
+- sed -e 's/# CONFIG_NETMSG is not set/CONFIG_NETMSG=y/' -i .config
 
 build-commands:
 - make
