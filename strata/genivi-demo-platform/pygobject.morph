@@ -1,0 +1,8 @@
+name: pygobject
+kind: chunk
+build-system: autotools
+pre-configure-commands:
+- sed -i 's/automake-1.11/automake-1.15/g' autogen.sh
+- sed -i 's/aclocal-1.11/aclocal-1.15/g' autogen.sh
+configure-commands:
+- ./autogen.sh --prefix="$PREFIX" --disable-cairo

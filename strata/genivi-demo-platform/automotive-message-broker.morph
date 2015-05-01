@@ -1,0 +1,23 @@
+name: automotive-message-broker
+kind: chunk
+description: The GENIVI Automotive Message Broker
+build-system: cmake
+pre-configure-commands:
+- sed -i 's:pkg_check_modules(json REQUIRED json):pkg_check_modules(json REQUIRED json-c):' $(find -name 'CMakeLists.txt')
+- sed -i 's:<json/json.h>:<json-c/json.h>:' $(find . -name '*.h' -o -name '*.c' -o -name '*.hpp' -o -name '*.cpp')
+post-install-commands:
+- mkdir -p "$DESTDIR/usr/lib/systemd/system"
+- |
+  cat >"$DESTDIR/usr/lib/systemd/system/ambd.service" <<EOF
+  [Unit]
+  Description=Automotive Message Broker
+  After=syslog.target
+  
+  [Service]
+  Type=dbus
+  BusName=org.automotive.message.broker
+  ExecStart=/usr/bin/ambd
+  
+  [Install]
+  WantedBy=multi-user.target
+  EOF

@@ -1,0 +1,96 @@
+name: genivi-demo-platform
+kind: stratum
+description: Components which make up the GENIVI demo platform.
+build-depends:
+- morph: strata/gtk2.morph
+- morph: strata/qt5-tools.morph
+- morph: strata/qt5-tools-qtmultimedia.morph
+- morph: strata/qt5-tools-qtwebkit.morph
+- morph: strata/genivi.morph
+- morph: strata/wayland-generic.morph
+- morph: strata/weston-genivi.morph
+chunks:
+- name: mm-common
+  morph: strata/genivi-demo-platform/mm-common.morph
+  repo: upstream:mm-common
+  ref: baserock/genivi-demo-platform
+  unpetrify-ref: master
+  build-depends: []
+- name: sigc++
+  morph: strata/genivi-demo-platform/sigc++.morph
+  repo: upstream:sigc++
+  ref: d3f8647ee43f875915ddedbaaf719cc2a3d98c52
+  unpetrify-ref: master
+  build-depends:
+  - mm-common
+- name: glibmm
+  morph: strata/genivi-demo-platform/glibmm.morph
+  repo: upstream:glibmm
+  ref: e289d513b1565d7f829d62d54bff6b629d760379
+  unpetrify-ref: glibmm-2-40
+  build-depends:
+  - mm-common
+  - sigc++
+- name: boost
+  morph: strata/genivi-demo-platform/boost.morph
+  repo: upstream:boost-tarball
+  ref: ed232fdd34968697a68783b3195b1da4226915b5
+  unpetrify-ref: boost_1_57_0
+  build-depends: []
+- name: dbus-c++
+  morph: strata/genivi-demo-platform/dbus-c++.morph
+  repo: upstream:dbus-c++
+  ref: 8d351eec25430651acbac014e44ec011fac32d57
+  unpetrify-ref: baserock/genivi-demo-platform
+  build-depends: []
+- name: libxslt
+  repo: upstream:libxslt
+  ref: master
+  build-depends: []
+- name: browser-poc
+  morph: strata/genivi-demo-platform/browser-poc.morph
+  repo: upstream:genivi/browser-poc
+#  ref: f1d02d11d86d53b96c85a2ea03d7cd4736c1c616
+  ref: baserock/jonathanmaw/sensible-build
+  unpetrify-ref: baserock/genivi-demo-platform
+  build-depends: []
+- name: dbus-python
+  repo: upstream:dbus-python
+  ref: d0d5b5be685dc4c16b21c54335becc87ca4d6f58
+  unpetrify-ref: dbus-python-1.2.0
+- name: gnome-common
+  repo: upstream:gnome-common
+  ref: d213283fcb5228d05eb2c796579f18240e8467e8
+  unpetrify-ref: 3.12.0
+- name: pygobject
+  morph: strata/genivi-demo-platform/pygobject.morph
+  repo: upstream:pygobject
+  ref: 9456ba70fdb98b3a4eb7ee2f630182387a54ca00
+  unpetrify-ref: pygobject-2-28
+  build-depends:
+  - gnome-common
+- name: automotive-message-broker
+  morph: strata/genivi-demo-platform/automotive-message-broker.morph
+  repo: upstream:automotive-message-broker
+  ref: 2b8c0be99cf8d99ede79d4842191ae39d7c6e15a
+  unpetrify-ref: 0.13
+  build-depends:
+  - dbus-python
+  - pygobject
+  - boost
+- name: audiomanager-poc
+  morph: strata/genivi-demo-platform/audiomanager-poc.morph
+  repo: upstream:audiomanager
+  ref: baserock/jonathanmaw/genivi-demo-jetson
+- name: navit
+  morph: strata/genivi-demo-platform/navit.morph
+  repo: upstream:navit-svn
+  ref: 358812af2c27c4abe324beb205e6d156b96fb1ea
+  unpetrify-ref: master
+- name: genivi-demo-platform-hmi
+  morph: strata/genivi-demo-platform/genivi-demo-platform-hmi.morph
+  repo: upstream:genivi/genivi-demo-platform-hmi
+  ref: baserock/jonathanmaw/genivi-demo-jetson
+  unpetrify-ref: 3955d0dd4a544577f812854ef333ddb80dbc177f
+  build-depends:
+  - dbus-c++

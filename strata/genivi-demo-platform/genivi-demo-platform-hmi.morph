@@ -1,0 +1,100 @@
+name: genivi-demo-platform-hmi
+kind: chunk
+pre-configure-commands:
+- |
+  sed -i 's/sd_journal_print(LOG_DEBUG,/printf("DEBUG: "/' $(find . -name '*.cpp' -o -name '*.h')
+- |
+  sed -i 's/sd_journal_print(LOG_INFO,/printf("INFO: "/' $(find . -name '*.cpp' -o -name '*.h')
+- |
+  sed -i 's/sd_journal_print(LOG_ERR,/printf("ERR: "/' $(find . -name '*.cpp' -o -name '*.h')
+- |
+  git apply - << "EOF"
+  diff --git a/configure.ac b/configure.ac
+  index f0c7ba2..4ff1462 100644
+  --- a/configure.ac
+  +++ b/configure.ac
+  @@ -61,10 +61,10 @@ PKG_CHECK_MODULES([CLIENT], [
+   AC_CHECK_HEADERS([ilm/ilm_types.h])
+   AC_CHECK_LIB(ilmClient, ilm_UpdateInputEventAcceptanceOn,
+   	[ILM_LIBS="-lilmCommon -lilmClient"],
+  -	[AC_MSG_ERROR([Can't find correct ilmClient library.])])
+  +	[AC_MSG_ERROR([Can't find correct ilmClient library.])], -lilmControl)
+   AC_CHECK_LIB(ilmControl, ilm_SetKeyboardFocusOn,
+   	[ILM_LIBS="$ILM_LIBS -lilmControl"],
+  -	[AC_MSG_ERROR([Can't find correct ilmControl library.])])
+  +	[AC_MSG_ERROR([Can't find correct ilmControl library.])], -lilmClient)
+   AC_SUBST(ILM_LIBS)
+   
+   WAYLAND_PREFIX=`$PKG_CONFIG --variable=prefix wayland-client`
+  EOF
+configure-commands:
+- autoreconf -vfi && ./configure --prefix=$PREFIX
+- cd app/gdp-hmi-background && qmake -r gdp-hmi-background.pro
+- cd app/gdp-hmi-launcher && qmake -r gdp-hmi-launcher.pro
+- cd app/gdp-hmi-panel && qmake -r gdp-hmi-panel.pro
+build-commands:
+- make
+- cd app/gdp-hmi-background && make
+- cd app/gdp-hmi-launcher && make
+- cd app/gdp-hmi-panel && make
+install-commands:
+- make DESTDIR=$DESTDIR install
+- cd app/gdp-hmi-background && make INSTALL_ROOT=$DESTDIR install
+- cd app/gdp-hmi-launcher && make INSTALL_ROOT=$DESTDIR install
+- cd app/gdp-hmi-panel && make INSTALL_ROOT=$DESTDIR install
+- mkdir -p $DESTDIR/usr/share/gdp
+- cp -a app/*/assets/* $DESTDIR/usr/share/gdp/
+- mkdir -p "$DESTDIR/usr/lib/systemd/user"
+- |
+  cat >"$DESTDIR/usr/lib/systemd/user/gdp-hmi-launcher.service" <<EOF
+  [Unit]
+  Description=GENIVI Demo Platform HMI - Launcher
+  Requires=gdp-hmi-controller.service gdp-hmi-background.service gdp-hmi-panel.service
+  
+  [Service]
+  Environment=LD_PRELOAD=/usr/lib/libEGL.so
+  ExecStart=/usr/bin/gdp-hmi-launcher
+  EOF
+- |
+  cat >"$DESTDIR/usr/lib/systemd/user/gdp-hmi-background.service" <<EOF
+  [Unit]
+  Description=GENIVI Demo Platform HMI - Background
+  
+  [Service]
+  Environment=LD_PRELOAD=/usr/lib/libEGL.so
+  ExecStart=/usr/bin/gdp-hmi-background
+  EOF
+- |
+  cat >"$DESTDIR/usr/lib/systemd/user/gdp-hmi-controller.service" <<EOF
+  [Unit]
+  Description=GENIVI Demo Platform HMI - Controller
+  Requires=dbus.service
+  
+  [Service]
+  ExecStart=/usr/bin/gdp-hmi-controller
+  EOF
+- |
+  cat >"$DESTDIR/usr/lib/systemd/user/gdp-hmi-panel.service" <<EOF
+  [Unit]
+  Description=GENIVI Demo Platform HMI - Panel
+  
+  [Service]
+  Environment=LD_PRELOAD=/usr/lib/libEGL.so
+  ExecStart=/usr/bin/gdp-hmi-panel
+  EOF
+- |
+  cat >"$DESTDIR/usr/lib/systemd/user/EGLWLMockNavigation.service" <<EOF
+  [Unit]
+  Description=EGL Wayland Mock Navigation
+  
+  [Service]
+  ExecStart=/usr/bin/EGLWLMockNavigation -surface 10
+  EOF
+- |
+  cat > "$DESTDIR/usr/lib/systemd/user/EGLWLInputEventExample.service" <<EOF
+  [Unit]
+  Description=EGL Wayland Input Event Example
+  
+  [Service]
+  ExecStart=/usr/bin/EGLWLInputEventExample --surface=5100
+  EOF
