@@ -1,0 +1,14 @@
+name: samba
+kind: chunk
+configure-commands:
+- |
+  ./configure \
+    --without-ldap \
+    --disable-gnutls \
+    --without-ad-dc \
+    --without-acl-support \
+    --without-ads
+build-commands:
+- make
+install-commands:
+- make install

@@ -1,0 +1,12 @@
+name: samba
+kind: stratum
+description: samba stratum
+build-depends:
+- morph: strata/core.morph
+chunks:
+- name: samba
+  morph: strata/samba/samba.morph
+  repo: upstream:samba
+  ref: e359d826a42656bb02ca2ab85f0fa886a046cb58
+  unpetrify-ref: master
+  build-depends: []

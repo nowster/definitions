@@ -23,6 +23,8 @@ strata:
   morph: strata/openstack-clients.morph
 - name: devtools
   morph: strata/devtools.morph
+- name: samba
+  morph: strata/samba.morph
 - name: bsp-mips64b-edgerouterpro
   morph: strata/bsp-mips64b-edgerouterpro.morph
 configuration-extensions:
