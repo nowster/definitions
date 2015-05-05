@@ -51,7 +51,7 @@ chunks:
   morph: strata/genivi-demo-platform/browser-poc.morph
   repo: upstream:genivi/browser-poc
 #  ref: f1d02d11d86d53b96c85a2ea03d7cd4736c1c616
-  ref: baserock/jonathanmaw/sensible-build
+  ref: baserock/jonathanmaw/genivi-demo-jetson
   unpetrify-ref: baserock/genivi-demo-platform
   build-depends: []
 - name: dbus-python
