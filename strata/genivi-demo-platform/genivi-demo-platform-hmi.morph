@@ -42,12 +42,10 @@ install-commands:
 - cd app/gdp-hmi-background && make INSTALL_ROOT=$DESTDIR install
 - cd app/gdp-hmi-launcher && make INSTALL_ROOT=$DESTDIR install
 - cd app/gdp-hmi-panel && make INSTALL_ROOT=$DESTDIR install
-- mkdir -p $DESTDIR/usr/share/gdp/gdp-hmi-background
-- mkdir -p $DESTDIR/usr/share/gdp/gdp-hmi-launcher
-- mkdir -p $DESTDIR/usr/share/gdp/gdp-hmi-panel
-- cp -a app/gdp-hmi-background/assets/* $DESTDIR/usr/share/gdp/gdp-hmi-background/
-- cp -a app/gdp-hmi-launcher/assets/* $DESTDIR/usr/share/gdp/gdp-hmi-launcher/
-- cp -a app/gdp-hmi-panel/assets/* $DESTDIR/usr/share/gdp/gdp-hmi-panel/
+- mkdir -p $DESTDIR/usr/share/gdp
+- cp -a app/gdp-hmi-background/assets/* $DESTDIR/usr/share/gdp/
+- cp -a app/gdp-hmi-launcher/assets/* $DESTDIR/usr/share/gdp/
+- cp -a app/gdp-hmi-panel/assets/* $DESTDIR/usr/share/gdp/
 - mkdir -p "$DESTDIR/usr/lib/systemd/user"
 - |
   cat >"$DESTDIR/usr/lib/systemd/user/gdp-hmi-launcher.service" <<EOF
