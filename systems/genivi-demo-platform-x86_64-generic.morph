@@ -59,3 +59,4 @@ configuration-extensions:
 - simple-network
 - nfsboot
 - install-files
+- install-essential-files
