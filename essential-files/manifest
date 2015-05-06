@@ -1,3 +1,10 @@
 0040755 0 0 /etc
 overwrite 0100644 0 0 /etc/os-release
 overwrite 0100644 0 0 /etc/profile
+0040755 0 0 /etc/systemd
+0040755 0 0 /etc/systemd/system
+0040755 0 0 /etc/systemd/system/user@.service.d
+0100644 0 0 /etc/systemd/system/user@.service.d/dbus.conf
+0040755 0 0 /etc/systemd/user
+0100644 0 0 /etc/systemd/user/dbus.service
+0100644 0 0 /etc/systemd/user/dbus.socket
