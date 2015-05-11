@@ -2,12 +2,24 @@ name: samba
 kind: chunk
 configure-commands:
 - |
+  # really really ugly hacks
+  #
+  # This fixes a problem with configure and recent compilers
+  # implementing c9x by default
+  sed -i "s/#define bool int//" source3/lib/util_sec.c
+  #
+  # This fixes the problem with Baserock build environment running
+  # as root but preventing certain privileged operations from
+  # taking effect.  eg. seteuid()
+  sed -i "s/getuid() != 0/1/" source3/lib/util_sec.c
+  #
   ./configure \
     --without-ldap \
     --disable-gnutls \
     --without-ad-dc \
     --without-acl-support \
-    --without-ads
+    --without-ads \
+    --prefix=/usr --enable-fhs
 build-commands:
 - make
 install-commands:

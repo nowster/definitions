@@ -3,10 +3,17 @@ kind: stratum
 description: samba stratum
 build-depends:
 - morph: strata/core.morph
+- morph: strata/foundation.morph
 chunks:
+- name: linux-pam
+  repo: upstream:linux-pam
+  ref: b1521c97e73b10469f7b34c0571d51c647eca83c
+  unpetrify-ref: Linux-PAM-1.1.8
+  build-depends: []
 - name: samba
   morph: strata/samba/samba.morph
   repo: upstream:samba
-  ref: e359d826a42656bb02ca2ab85f0fa886a046cb58
+  ref: 704592c14dfedbe98e95d43860d062dc6338bca3
   unpetrify-ref: master
-  build-depends: []
+  build-depends:
+  - linux-pam
