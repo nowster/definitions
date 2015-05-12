@@ -5,9 +5,13 @@ configure-commands:
 - |
   cpu=$(echo $TARGET | cut -d '-' -f 1)
   case "$cpu" in
-  armv7lhf | mips* )
+  armv7lhf )
     DRIDRIVERS=no
     GALLIUMDRIVERS=nouveau,freedreno,svga,swrast,vc4
+    ;;
+  mips* )
+    DRIDRIVERS=no
+    GALLIUMDRIVERS=svga,swrast
     ;;
   *)
     DRIDRIVERS=yes
