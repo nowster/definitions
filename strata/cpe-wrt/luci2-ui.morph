@@ -1,0 +1,29 @@
+name: luci2-ui
+kind: chunk
+
+configure-commands:
+- cd luci2/src ; cmake -DCMAKE_INSTALL_PREFIX=$PREFIX
+
+build-commands:
+- cd luci2/src ; make
+
+install-commands:
+- install -d $DESTDIR/www
+- cd luci2/htdocs ; cp -R * $DESTDIR/www
+- install -d $DESTDIR$PREFIX/share/rpcd
+- cd luci2/share ; cp -R * $DESTDIR$PREFIX/share/rpcd
+- install -d $DESTDIR$PREFIX/lib/rpcd
+- cd luci2/src/rpcd ; install luci2.so bwmon.so $DESTDIR$PREFIX/lib/rpcd
+- install -d $DESTDIR/www/cgi-bin
+- install -d $DESTDIR$PREFIX/libexec
+- cd luci2/src/io ; install luci2-io $DESTDIR$PREFIX/libexec
+- cd $DESTDIR/www/cgi-bin ; ln ../..$PREFIX/libexec/luci2-io luci-upload
+- cd $DESTDIR/www/cgi-bin ; ln ../..$PREFIX/libexec/luci2-io luci-backup
+- install -d $DESTDIR$PREFIX/share/rpcd/menu.d
+- cd luci2-p910nd/files/usr/share/rpcd/menu.d ; install services.p910nd.json $DESTDIR$PREFIX/share/rpcd/menu.d
+- install -d $DESTDIR$PREFIX/share/rpcd/acl.d
+- cd luci2-p910nd/files/usr/share/rpcd/acl.d ; install services.p910nd.json $DESTDIR$PREFIX/share/rpcd/acl.d
+- install -d $DESTDIR/www/luci2/template
+- cd luci2-p910nd/files/www/luci2/template ; install services.p910nd.htm $DESTDIR/www/luci2/template
+- install -d $DESTDIR/www/luci2/view
+- cd luci2-p910nd/files/www/luci2/view ; install services.p910nd.js $DESTDIR/www/luci2/view

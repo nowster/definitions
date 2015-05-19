@@ -9,8 +9,8 @@ pre-configure-commands:
 - sed -i "s/SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS \"\")/SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS \"\")\nINCLUDE(FindPkgConfig)\nPKG_CHECK_MODULES(JSONC json-c)\nIF(JSONC_FOUND)\n  ADD_DEFINITIONS(-DJSONC)\n  INCLUDE_DIRECTORIES(${JSONC_INCLUDE_DIRS})\nENDIF()\n\nPKG_CHECK_MODULES(LIBNL libnl-3.0)\nINCLUDE_DIRECTORIES(\${LIBNL_INCLUDE_DIRS})\n/" CMakeLists.txt
 
 build-commands:
-- cmake -DCMAKE_INSTALL_PREFIX=$PREFIX
-- make VERBOSE=1
+- cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DLIBNL_LIBS=-lnl-tiny -DLIBNL_INCLUDE_DIRS=/usr/include/libnl-tiny
+- make
 
 install-commands:
 - make install

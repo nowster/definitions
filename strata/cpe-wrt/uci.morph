@@ -9,4 +9,4 @@ install-commands:
 - make install
 
 post-install-commands:
-- install -d "$DESTDIR/bin" && cd "$DESTDIR/bin" && ln -s ../usr/bin/uci uci
+- install -d "$DESTDIR/bin" && cd "$DESTDIR/bin" && ln -s ..$PREFIX/bin/uci uci

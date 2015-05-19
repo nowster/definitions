@@ -12,7 +12,7 @@ post-install-commands:
 - |
   install -d "$DESTDIR/sbin"
   cd "$DESTDIR/sbin"
-  ln -s ../usr/sbin/ubusd ubusd
+  ln -s ..$PREFIX/sbin/ubusd ubusd
   install -d "$DESTDIR/bin"
   cd "$DESTDIR/bin"
-  ln -s ../usr/bin/ubus ubus
+  ln -s ..$PREFIX/bin/ubus ubus

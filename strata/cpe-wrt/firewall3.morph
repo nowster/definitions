@@ -1,4 +1,4 @@
-name: ubox
+name: firewall3
 kind: chunk
 
 build-commands:
@@ -12,4 +12,4 @@ post-install-commands:
 - |
   install -d "$DESTDIR/sbin"
   cd "$DESTDIR/sbin"
-  ln -s ../usr/sbin/fw3 firewall3
+  ln -s ..$PREFIX/sbin/firewall3 fw3

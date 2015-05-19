@@ -2,9 +2,35 @@ name: cpe-wrt
 kind: stratum
 description: a CPE router strata based on OpenWrt
 build-depends:
-  - morph: strata/foundation.morph
-  - morph: strata/connectivity.morph
+  - morph: strata/core-wrt.morph
 chunks:
+- name: lzo-wrt
+  morph: strata/cpe-wrt/lzo-wrt.morph
+  repo: upstream:lzo
+  ref: 5cca83e4d1b0be5825a597ab24ffa6126dc0bc95
+  unpetrify-ref: lzo-2.08
+- name: libnl-tiny
+  morph: strata/cpe-wrt/libnl-tiny.morph
+  repo: upstream:openwrt/libnl-tiny
+  ref: 91420e5fbbe932f93d55f0581bf43256a3dae8dc
+  unpetrify-ref: master
+- name: wpa-supplicant-wrt
+  morph: strata/cpe-wrt/wpa_supplicant_wrt.morph
+  repo: upstream:hostap
+  ref: c4a58c968044c2002706b1a69c089c4d63728e77
+  unpetrify-ref: baserock/hostap_2_3
+  build-depends:
+  - libnl-tiny
+- name: iptables
+  repo: upstream:iptables
+  ref: 482c6d3731e2681cb4baae835c294840300197e6
+  unpetrify-ref: v1.4.21
+- name: dropbear
+  morph: strata/cpe-wrt/dropbear.morph
+  repo: upstream:openwrt/dropbear
+  ref: dd0352d93b92a4cf78bc05958304bc779233d68c
+  unpetrify-ref: DROPBEAR_2015.67
+  build-depends: []
 - name: lua
   repo: upstream:lua
   ref: 5.1.5
@@ -42,12 +68,6 @@ chunks:
   build-depends:
   - libubox
   - lua
-- name: odhcpd
-  repo: upstream:openwrt/odhcpd
-  ref: 721db56281dba79158470d7f69ccc7577f11fbb6
-  unpetrify-ref:
-  build-depends:
-  - uci
 - name: ubox
   morph: strata/cpe-wrt/ubox.morph
   repo: upstream:openwrt/ubox
@@ -56,6 +76,32 @@ chunks:
   build-depends:
   - ubus
   - uci
+  - iptables
+- name: uhttpd
+  morph: strata/cpe-wrt/uhttpd.morph
+  repo: file:///src/workspace/uhttpd
+  ref: e127d57b212c3617c4608580b77f58f6abdeeda1
+  build-depends:
+  - ubox
+  - json-c
+- name: ustream-ssl
+  repo: upstream:openwrt/ustream-ssl
+  ref: a4ca61527236e89eb9efb782fd9bfd04796144e3
+  build-depends:
+  - ubox
+- name: uclient
+  repo: upstream:openwrt/uclient
+  ref: 81fdb8fdf1470e1c7bf3124ff20d17feaeb519ee
+  build-depends:
+  - ubox
+  - ustream-ssl
+- name: odhcpd
+  repo: upstream:openwrt/odhcpd
+  ref: 681ba23d0b3678a9a0c90ef938cd1d48f2ee6046
+  unpetrify-ref:
+  build-depends:
+  - uci
+  - ubox
 - name: firewall3
   morph: strata/cpe-wrt/firewall3.morph
   repo: upstream:openwrt/firewall3
@@ -64,6 +110,7 @@ chunks:
   build-depends:
   - ubus
   - uci
+  - iptables
 - name: fstools
   morph: strata/cpe-wrt/fstools.morph
   repo: upstream:openwrt/fstools
@@ -82,12 +129,14 @@ chunks:
   - libubox
   - uci
   - ubus
+  - libnl-tiny
 - name: mtd
   morph: strata/cpe-wrt/mtd.morph
   repo: upstream:mtd-utils
-  ref: 92686f212c9a4e16891c6a3c57629cbf4f0f8360
-  unpetrify-ref:
-  build-depends: []
+  ref: dcb5ebe69c663375f13aefa303c8bbbabf414ac8
+  unpetrify-ref: baserock/1.5.1
+  build-depends:
+  - lzo-wrt
 - name: procd
   morph: strata/cpe-wrt/procd.morph
   repo: upstream:openwrt/procd
@@ -103,20 +152,40 @@ chunks:
   build-depends:
   - netifd
   - procd
-#- name: iwinfo
-#  morph: strata/cpe-wrt/iwinfo.morph
-#  repo: git://git.openwrt.org/project/iwinfo.git
-# ref: HEAD
-#  unpetrify-ref:
-#  build-depends:
-#  - uci
-#- name: rpcd
-#  morph: strata/cpe-wrt/rpcd.morph
-#  repo: upstream:openwrt/rpcd
-#  ref: 805e8ce8918237d93baafa53413c5c4ef0380504
-#  unpetrify-ref:
-#  build-depends:
-#  - json-c
-#  - iwinfo
-#  - ubus
-#  - uci
+- name: iwinfo
+  morph: strata/cpe-wrt/iwinfo.morph
+  repo: file:///src/workspace/iwinfo
+  ref: 6e67940be59e1aee5d275dd61172b257cb34d726
+  unpetrify-ref: master
+  build-depends:
+  - uci
+- name: rpcd
+  morph: strata/cpe-wrt/rpcd.morph
+  repo: upstream:openwrt/rpcd
+  ref: 805e8ce8918237d93baafa53413c5c4ef0380504
+  unpetrify-ref:
+  build-depends:
+  - json-c
+  - iwinfo
+  - ubus
+  - uci
+- name: jsonpath
+  morph: strata/cpe-wrt/jsonpath.morph
+  repo: upstream:openwrt/jsonpath
+  ref: cdc760c58077f44fc40adbbe41e1556a67c1b9a9
+  unpetrify-ref:
+  build-depends:
+  - json-c
+  - libubox
+- name: dnsmasq
+  morph: strata/cpe-wrt/dnsmasq.morph
+  repo: upstream:openwrt/dnsmasq
+  ref: b059c96dc69dfe3055c5b32b078a05c53b11ebb3
+- name: luci2-ui
+  morph: strata/cpe-wrt/luci2-ui.morph
+  repo: upstream:openwrt/luci2-ui
+  ref: e452ca693af5278ff2ddc69b6f8ed0f346c98fb1
+  build-depends:
+  - ubox
+  - ubus
+  - rpcd

@@ -1,4 +1,4 @@
-name: bison
+name: bison-wrt
 kind: chunk
 build-system: autotools
 pre-configure-commands:

@@ -1,0 +1,5 @@
+name: nasm-wrt
+kind: chunk
+build-system: autotools
+install-commands:
+- make INSTALLROOT="$DESTDIR" install

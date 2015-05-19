@@ -1,0 +1,21 @@
+name: minimal-system-x86_64-openwrt
+kind: system
+description: The set of strata required to have a minimal system for a 64-bit x86
+  system.
+arch: x86_64
+strata:
+- name: build-essential
+  morph: strata/build-essential.morph
+  artifacts:
+  - build-essential-minimal
+- name: cpe-wrt
+  morph: strata/cpe-wrt.morph
+- name: bsp-x86_64-openwrt
+  morph: strata/bsp-x86_64-openwrt.morph
+  artifacts:
+  - bsp-x86_64-openwrt-runtime
+configuration-extensions:
+- set-hostname
+- simple-network
+- nfsboot
+- install-files

@@ -2,7 +2,15 @@ name: iwinfo
 kind: chunk
 
 build-commands:
-- make
+- make CFLAGS=-fPIC
 
 install-commands:
-- make install
+- install -d $DESTDIR$PREFIX/include/iwinfo
+- cd include ; install iwinfo.h $DESTDIR$PREFIX/include/
+- cd include/iwinfo ; install * $DESTDIR$PREFIX/include/iwinfo
+- install -d $DESTDIR$PREFIX/lib
+- install libiwinfo.so $DESTDIR$PREFIX/lib/libiwinfo.so
+- install -d $DESTDIR$PREFIX/lib/lua
+- install iwinfo.so $DESTDIR$PREFIX/lib/lua/iwinfo.so
+- install -d $DESTDIR$PREFIX/bin
+- install iwinfo $DESTDIR$PREFIX/bin/iwinfo

@@ -1,0 +1,8 @@
+name: dnsmasq
+kind: chunk
+
+build-commands:
+- make
+
+install-commands:
+- make DESTDIR=$DESTDIR PREFIX=$PREFIX install

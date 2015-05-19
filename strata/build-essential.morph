@@ -305,7 +305,7 @@ chunks:
 - name: busybox
   morph: strata/build-essential/busybox.morph
   repo: https://github.com/mossmaurice/busybox.git
-  ref: e7988013de531c2d17fad9412cb5ea528ed66500
+  ref: 52880005e89c4dbf1e31aa0c46ae4c99df72f127
   unpetrify-ref: shoinkis/openwrt
   build-depends:
   - stage2-binutils

@@ -1,0 +1,16 @@
+name: dropbear
+kind: chunk
+
+configure-commands:
+- autoreconf -ivf
+- ./configure --prefix=$PREFIX
+
+build-commands:
+- make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp"
+
+install-commands:
+- make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" DESTDIR=$DESTDIR install
+
+post-install-commands:
+- install -d "$DESTDIR/sbin" && cd "$DESTDIR/sbin" && ln -s ..$PREFIX/sbin/dropbear ssh
+

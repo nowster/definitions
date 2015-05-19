@@ -1,0 +1,8 @@
+name: libnl-tiny
+kind: chunk
+
+build-commands:
+- make 
+
+install-commands:
+- make prefix=$PREFIX DESTDIR=$DESTDIR install

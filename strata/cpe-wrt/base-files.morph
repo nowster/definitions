@@ -7,27 +7,23 @@ pre-configure-commands:
 - sed -i "s/export -n/export/" package/base-files/files/lib/functions/preinit.sh
 
 install-commands:
-# FHS directories
-- |
-  cp -r package/base-files/files/* "$DESTDIR"/
+- cp -r package/base-files/files/* "$DESTDIR"/
 
-# procd files
--  install package/system/procd/files/hotplug.json "$DESTDIR"/etc/
--  install package/system/procd/files/hotplug-preinit.json "$DESTDIR"/etc/
--  install package/system/procd/files/reload_config "$DESTDIR"/sbin/
--  install package/system/procd/files/procd.sh "$DESTDIR"/lib/functions/
+- install package/system/procd/files/hotplug.json "$DESTDIR"/etc/
+- install package/system/procd/files/hotplug-preinit.json "$DESTDIR"/etc/
+- install package/system/procd/files/reload_config "$DESTDIR"/sbin/
+- install package/system/procd/files/procd.sh "$DESTDIR"/lib/functions/
 
-# netifd
-- |
-  cp -r package/network/config/netifd/files/* "$DESTDIR"/
+- install -d $DESTDIR/etc/init.d
+- install -d $DESTDIR/etc/rc.d
+- cp -r package/network/config/netifd/files/* "$DESTDIR"/
+- install package/system/ubox/files/log.init "$DESTDIR"/etc/init.d/log
+- cp -r package/system/uci/files/* "$DESTDIR"/
 
-# ubox
-- |
-  cp -r package/system/ubox/files/* "$DESTDIR"/etc/init.d/log
-
-# uci
-- |
-  cp -r package/system/uci/files/* "$DESTDIR"/
-
-# lock symlink
-- ln -s busybox "$DESTDIR"/bin/lock
+- install package/network/services/odhcpd/files/odhcpd.init "$DESTDIR"/etc/init.d/odhcpd
+- install package/network/services/dnsmasq/files/dnsmasq.init "$DESTDIR"/etc/init.d/dnsmasq
+- install package/network/services/dropbear/files/dropbear.init "$DESTDIR"/etc/init.d/dropbear
+- install package/network/services/uhttpd/files/uhttpd.init "$DESTDIR"/etc/init.d/uhttpd
+- install package/system/rpcd/files/rpcd.init "$DESTDIR"/etc/init.d/rpcd
+- install package/system/mountd/files/mountd.init "$DESTDIR"/etc/init.d/mountd
+- install package/network/config/firewall/files/firewall.init "$DESTDIR"/etc/init.d/firewall

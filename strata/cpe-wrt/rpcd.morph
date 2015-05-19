@@ -4,9 +4,13 @@ kind: chunk
 pre-configure-commands:
 - sed -i "s/json\/json.h/json-c\/json.h/" include/rpcd/plugin.h
 
-build-commands:
+configure-commands:
 - cmake -DCMAKE_INSTALL_PREFIX=$PREFIX
+
+build-commands:
 - make
 
 install-commands:
 - make install
+- install -d $DESTDIR$PREFIX/include/rpcd
+- cd include/rpcd ; install * $DESTDIR$PREFIX/include/rpcd
