@@ -35,6 +35,8 @@ configure-commands:
       armv7*)   ARCH_FLAGS="--with-arch=armv7-a" ;;
       mips64*)  ARCH_FLAGS="--with-arch=mips64 \
                             --with-abi=64" ;;
+      mips*)    ARCH_FLAGS="--with-arch=mips32 \
+                            --with-abi=32" ;;
   esac
   export STAGE2_SYSROOT="$(dirname $(pwd))"
   export CC="$TARGET_STAGE1-gcc --sysroot=$STAGE2_SYSROOT"
