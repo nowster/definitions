@@ -13,11 +13,12 @@ chunks:
   repo: upstream:file
   ref: f69c3fd9bcb108292e7887dd889e8b49f68c4a52
   unpetrify-ref: file-5.22
-- name: gdb
-  morph: strata/tools/gdb.morph
-  repo: upstream:binutils-gdb
-  ref: 129ee12d013f4a2f09fe40a33072e6e47e949890
-  unpetrify-ref: gdb-7.8-branch
+#- name: gdb
+#  morph: strata/tools/gdb.morph
+#  repo: upstream:binutils-gdb
+##  ref: 129ee12d013f4a2f09fe40a33072e6e47e949890
+#  ref: 230d39cacdc2a7bfd8b312df83ce7121a4920924
+#  unpetrify-ref: gdb-7.8-branch
 - name: linux-user-chroot
   repo: upstream:linux-user-chroot
   ref: d25cc110f69e6e71a95b4ac532dcfc5423d4a16b
