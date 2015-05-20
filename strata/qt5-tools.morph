@@ -13,8 +13,9 @@ chunks:
 - name: qtbase
   morph: strata/qt5-tools/qtbase.morph
   repo: upstream:qt5/qtbase
-  ref: 5367fa356233da4c0f28172a8f817791525f5457
-  unpetrify-ref: v5.4.0
+#  ref: 5367fa356233da4c0f28172a8f817791525f5457
+  ref: 69196b38c481610ef30bfe8ce8e7ba6826729ab8
+  unpetrify-ref: v5.4.1
   build-depends:
   - icu
 - name: qtsvg
