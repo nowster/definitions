@@ -79,8 +79,8 @@ chunks:
   - iptables
 - name: uhttpd
   morph: strata/cpe-wrt/uhttpd.morph
-  repo: file:///src/workspace/uhttpd
-  ref: e127d57b212c3617c4608580b77f58f6abdeeda1
+  repo: upstream:openwrt/uhttpd
+  ref: 7c97b7862acb854baad6fbce9b12476996677f62
   build-depends:
   - ubox
   - json-c
