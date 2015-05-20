@@ -29,60 +29,81 @@ pre-configure-commands:
   EOF
 configure-commands:
 - autoreconf -vfi && ./configure --prefix=$PREFIX
-- cd app/gdp-hmi-background && qmake -r gdp-hmi-background.pro
-- cd app/gdp-hmi-launcher && qmake -r gdp-hmi-launcher.pro
-- cd app/gdp-hmi-panel && qmake -r gdp-hmi-panel.pro
+- cd app/gdp-hmi-background && qmake
+- cd app/gdp-hmi-launcher2 && qmake
+- cd app/gdp-hmi-panel && qmake
+- cd app/qml-example && qmake
 build-commands:
 - make
 - cd app/gdp-hmi-background && make
-- cd app/gdp-hmi-launcher && make
+- cd app/gdp-hmi-launcher2 && make
 - cd app/gdp-hmi-panel && make
+- cd app/qml-example && make
 install-commands:
 - make DESTDIR=$DESTDIR install
 - cd app/gdp-hmi-background && make INSTALL_ROOT=$DESTDIR install
-- cd app/gdp-hmi-launcher && make INSTALL_ROOT=$DESTDIR install
+- cd app/gdp-hmi-launcher2 && make INSTALL_ROOT=$DESTDIR install
 - cd app/gdp-hmi-panel && make INSTALL_ROOT=$DESTDIR install
+- cd app/qml-example && make INSTALL_ROOT=$DESTDIR install
 - mkdir -p $DESTDIR/usr/share/gdp
 - cp -a app/gdp-hmi-background/assets/* $DESTDIR/usr/share/gdp/
 - cp -a app/gdp-hmi-launcher/assets/* $DESTDIR/usr/share/gdp/
 - cp -a app/gdp-hmi-panel/assets/* $DESTDIR/usr/share/gdp/
 - mkdir -p "$DESTDIR/usr/lib/systemd/user"
 - |
-  cat >"$DESTDIR/usr/lib/systemd/user/gdp-hmi-launcher.service" <<EOF
+  cat >"$DESTDIR/usr/lib/systemd/user/gdp-hmi-launcher2.service" <<EOF
   [Unit]
-  Description=GENIVI Demo Platform HMI - Launcher
-  Requires=gdp-hmi-controller.service gdp-hmi-background.service gdp-hmi-panel.service
+  Description=GENIVI Demo Platform HMI - Launcher2
+  After=gdp-hmi-controller.service gdp-hmi-background.service gdp-hmi-panel.service
   
   [Service]
   Environment=LD_PRELOAD=/usr/lib/libEGL.so
-  ExecStart=/usr/bin/gdp-hmi-launcher
+  ExecStart=/usr/bin/gdp-hmi-launcher2
+
+  [Install]
+  WantedBy=default.target
   EOF
 - |
   cat >"$DESTDIR/usr/lib/systemd/user/gdp-hmi-background.service" <<EOF
   [Unit]
   Description=GENIVI Demo Platform HMI - Background
+  After=gdp-hmi-controller.service
   
   [Service]
   Environment=LD_PRELOAD=/usr/lib/libEGL.so
   ExecStart=/usr/bin/gdp-hmi-background
+
+  [Install]
+  WantedBy=default.target
   EOF
 - |
   cat >"$DESTDIR/usr/lib/systemd/user/gdp-hmi-controller.service" <<EOF
   [Unit]
   Description=GENIVI Demo Platform HMI - Controller
   Requires=dbus.service
-  
+  After=dbus.service weston.service
+
   [Service]
   ExecStart=/usr/bin/gdp-hmi-controller
+  Restart=always
+  RestartSec=2
+  TimeoutStopSec=1
+
+  [Install]
+  WantedBy=default.target
   EOF
 - |
   cat >"$DESTDIR/usr/lib/systemd/user/gdp-hmi-panel.service" <<EOF
   [Unit]
   Description=GENIVI Demo Platform HMI - Panel
+  After=gdp-hmi-controller.service
   
   [Service]
   Environment=LD_PRELOAD=/usr/lib/libEGL.so
   ExecStart=/usr/bin/gdp-hmi-panel
+
+  [Install]
+  WantedBy=default.target
   EOF
 - |
   cat >"$DESTDIR/usr/lib/systemd/user/EGLWLMockNavigation.service" <<EOF
@@ -99,4 +120,12 @@ install-commands:
   
   [Service]
   ExecStart=/usr/bin/EGLWLInputEventExample --surface=5100
+  EOF
+- |
+  cat > "$DESTDIR/usr/lib/systemd/user/qml-example.service" <<EOF
+  [Unit]
+  Description=Genivi QML Example
+  
+  [Service]
+  ExecStart=/usr/bin/qml-example
   EOF
