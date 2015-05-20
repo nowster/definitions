@@ -38,6 +38,8 @@ configure-commands:
       armv7*)   ARCH_FLAGS="--with-arch=armv7-a" ;;
       mips64*)  ARCH_FLAGS="--with-arch=octeon2 \
                             --with-abi=64" ;;
+      mips*)    ARCH_FLAGS="--with-arch=mips32 \
+                            --with-abi=32" ;;
   esac
 
   cd o && ../configure                                        \
