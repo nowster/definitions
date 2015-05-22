@@ -11,9 +11,6 @@ configure-commands:
 # Avoid dividing applets between $PREFIX/[s]bin and $PREFIX/usr/[s]bin.
 - '[ "$PREFIX" = /usr ] || sed -e ''s/.*INSTALL_NO_USR.*/CONFIG_INSTALL_NO_USR=y/'' -i .config'
 
-# We have GAWK, but in GENIVI baseline we want to get rid of it
-- sed -e 's/CONFIG_AWK=y.*/# CONFIG_AWK is not set/' -i .config
-
 # Depends on stuff that was removed since eglibc 2.14.
 - sed -e 's/CONFIG_INETD=y.*/# CONFIG_INETD is not set/' -i .config
 
