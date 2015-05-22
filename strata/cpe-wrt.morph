@@ -63,7 +63,7 @@ chunks:
 - name: ubus
   morph: strata/cpe-wrt/ubus.morph
   repo: upstream:openwrt/ubus
-  ref: 2d660c519d2fcff95248da9f4fd9b37d61f9eb09
+  ref: 2c30506a4f8434de95d9c3938857599005d0ef51
   unpetrify-ref:
   build-depends:
   - libubox
@@ -140,7 +140,7 @@ chunks:
 - name: procd
   morph: strata/cpe-wrt/procd.morph
   repo: upstream:openwrt/procd
-  ref: 47d5be7160e33966f5ded484232d10dcc220f172
+  ref: a6afa72f192f6efe8374d0f0c77fb2a545225a92
   unpetrify-ref:
   build-depends:
   - ubus
