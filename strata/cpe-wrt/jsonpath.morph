@@ -3,6 +3,7 @@ kind: chunk
 
 configure-commands:
 - sed -i 's/-Werror //' CMakeLists.txt
+- sed -i 's/jsonpath/jsonfilter/' CMakeLists.txt
 - cmake -DCMAKE_INSTALL_PREFIX=$PREFIX
 
 build-commands:
