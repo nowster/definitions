@@ -12,5 +12,5 @@ install-commands:
 - make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" DESTDIR=$DESTDIR install
 
 post-install-commands:
-- install -d "$DESTDIR/sbin" && cd "$DESTDIR/sbin" && ln -s ..$PREFIX/sbin/dropbear ssh
+- install -d "$DESTDIR$PREFIX/bin" && cd "$DESTDIR$PREFIX/bin" && ln -s ../sbin/dropbear ssh
 

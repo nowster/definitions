@@ -8,9 +8,15 @@ pre-configure-commands:
 - sed -i "s/#include <json/#include <json-c/" handler.c handler.h
 - sed -i "s/SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS \"\")/SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS \"\")\nINCLUDE(FindPkgConfig)\nPKG_CHECK_MODULES(JSONC json-c)\nIF(JSONC_FOUND)\n  ADD_DEFINITIONS(-DJSONC)\n  INCLUDE_DIRECTORIES(${JSONC_INCLUDE_DIRS})\nENDIF()\n\nPKG_CHECK_MODULES(LIBNL libnl-3.0)\nINCLUDE_DIRECTORIES(\${LIBNL_INCLUDE_DIRS})\n/" CMakeLists.txt
 
-build-commands:
+configure-commands:
 - cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DLIBNL_LIBS=-lnl-tiny -DLIBNL_INCLUDE_DIRS=/usr/include/libnl-tiny
+
+build-commands:
 - make
 
 install-commands:
 - make install
+- install -d "$DESTDIR"/lib/netifd
+- install scripts/* "$DESTDIR"/lib/netifd
+- install -d "$DESTDIR"/etc/config
+- install config/* "$DESTDIR"/etc/config
