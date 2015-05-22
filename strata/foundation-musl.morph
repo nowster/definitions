@@ -5,7 +5,7 @@ build-depends:
 - morph: strata/coreutils-common-musl.morph
 chunks:
 - name: attr
-  morph: strata/foundation/attr.morph
+  morph: strata/core/attr.morph
   repo: upstream:attr
   ref: fdcd484ed6f5df9a2d60ae446c325f12e3d9d0b3
   unpetrify-ref: baserock/morph-musl
@@ -29,7 +29,7 @@ chunks:
   unpetrify-ref: 2015a
   build-depends: []
 - name: libcap2
-  morph: strata/foundation/libcap2.morph
+  morph: strata/core/libcap2.morph
   repo: upstream:libcap2
   ref: 4f7cca1bc9c2a274edb39d351b65747010d3ba7b
   unpetrify-ref: baserock/morph
