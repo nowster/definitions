@@ -11,10 +11,10 @@ chunks:
   unpetrify-ref: sqlite-autoconf-3080801
   build-depends: []
 - name: cmake
-  morph: strata/core/cmake.morph
+  morph: strata/core-musl/cmake.morph
   repo: upstream:cmake
-  ref: 0b3781e4c497566acaa504d4106d11c02a642501
-  unpetrify-ref: v2.8.12.2
+  ref: 91d5261b58e97107fca610a868fbc283cbb8c856
+  unpetrify-ref: v3.2.2
   build-depends: []
 - name: gdbm
   morph: strata/core/gdbm.morph
