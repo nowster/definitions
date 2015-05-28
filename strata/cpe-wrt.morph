@@ -154,7 +154,7 @@ chunks:
   - procd
 - name: iwinfo
   morph: strata/cpe-wrt/iwinfo.morph
-  repo: file:///src/workspace/iwinfo
+  repo: upstream:openwrt/iwinfo
   ref: 6e67940be59e1aee5d275dd61172b257cb34d726
   unpetrify-ref: master
   build-depends:
