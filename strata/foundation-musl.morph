@@ -7,8 +7,8 @@ chunks:
 - name: attr
   morph: strata/core/attr.morph
   repo: upstream:attr
-  ref: fdcd484ed6f5df9a2d60ae446c325f12e3d9d0b3
-  unpetrify-ref: baserock/morph-musl
+  ref: cc08f19afa5d88315772c912e3b57398e26cb298
+  unpetrify-ref: baserock/2.4.47-musl
   build-depends: []
 - name: groff
   morph: strata/foundation/groff.morph
