@@ -17,7 +17,7 @@ chunks:
   unpetrify-ref: 1.22.3
   build-depends: []
 - name: kmod
-  morph: strata/foundation/kmod.morph
+  morph: strata/foundation-musl/kmod.morph
   repo: upstream:kmod
   ref: ae58de0fcb4a6528dd365e23d383bbe2eaf2d566
   unpetrify-ref: v18
