@@ -47,3 +47,5 @@ devices:
   minor: 5
   permissions: '0666'
   uid: 0
+post-install-commands:
+- rm -rf "$DESTDIR"/var
