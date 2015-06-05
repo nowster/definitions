@@ -1,12 +1,14 @@
 name: uci
 kind: chunk
 
-build-commands:
+configure-commands:
 - cmake -DCMAKE_INSTALL_PREFIX=$PREFIX
+
+build-commands:
 - make
 
 install-commands:
 - make install
 
 post-install-commands:
-- install -d "$DESTDIR/bin" && cd "$DESTDIR/bin" && ln -s ..$PREFIX/bin/uci uci
+- install -d "$DESTDIR/sbin" && cd "$DESTDIR/sbin" && ln -s ..$PREFIX/bin/uci uci
