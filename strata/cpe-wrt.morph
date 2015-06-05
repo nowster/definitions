@@ -48,7 +48,7 @@ chunks:
   build-depends: []
 - name: libubox
   repo: upstream:openwrt/libubox
-  ref: ca6d5472056ceee4b8ab320167e0ae8155a95985
+  ref: 791a361ad1b08fa56e554654109122b828657a2b
   unpetrify-ref:
   build-depends:
   - json-c
@@ -143,7 +143,9 @@ chunks:
   ref: a6afa72f192f6efe8374d0f0c77fb2a545225a92
   unpetrify-ref:
   build-depends:
+  - libubox
   - ubus
+  - json-c
 - name: base-files
   morph: strata/cpe-wrt/base-files.morph
   repo: upstream:openwrt/openwrt
