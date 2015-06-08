@@ -1,22 +1,15 @@
-name: bsp-x86_64-openwrt
+name: bsp-mips64b-openwrt
 kind: stratum
 description: The set of platform specific components required for booting a 64-bit
-  x86 based system.
+  MIPS BE OpenWRT based system.
 build-depends:
 - morph: strata/core-wrt.morph
 chunks:
-- name: kmod-wrt
-  morph: strata/bsp-x86_64-openwrt/kmod-wrt.morph
-  repo: upstream:kmod
-  ref: ae58de0fcb4a6528dd365e23d383bbe2eaf2d566
-  unpetrify-ref: v18
-- name: linux-x86-64-openwrt
-  morph: strata/bsp-openwrt/linux-x86-64-openwrt.morph
-  repo: upstream:linux
-  ref: 39a8804455fb23f09157341d3ba7db6d7ae6ee76
-  unpetrify-ref: v4.0
-  build-depends:
-  - kmod-wrt
+#- name: linux-x86-64-openwrt
+#  morph: strata/bsp-x86_64-openwrt/linux-x86-64-openwrt.morph
+#  repo: upstream:linux
+#  ref: 39a8804455fb23f09157341d3ba7db6d7ae6ee76
+#  unpetrify-ref: v4.0
 - name: nasm-wrt
   morph: strata/bsp-openwrt/nasm-wrt.morph
   repo: upstream:nasm
