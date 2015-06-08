@@ -1,0 +1,21 @@
+name: minimal-system-mips64b-openwrt
+kind: system
+description: The set of strata required to have a minimal system for a 64-bit x86
+  system.
+arch: mips64b
+strata:
+- name: build-essential
+  morph: strata/build-essential.morph
+  artifacts:
+  - build-essential-minimal
+- name: cpe-wrt
+  morph: strata/cpe-wrt.morph
+- name: bsp-mips64b-openwrt
+  morph: strata/bsp-mips64b-openwrt.morph
+  artifacts:
+  - bsp-mips64b-openwrt-runtime
+configuration-extensions:
+- set-hostname
+- simple-network
+- nfsboot
+- install-files

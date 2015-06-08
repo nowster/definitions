@@ -11,19 +11,19 @@ chunks:
   ref: ae58de0fcb4a6528dd365e23d383bbe2eaf2d566
   unpetrify-ref: v18
 - name: linux-x86-64-openwrt
-  morph: strata/bsp-x86_64-openwrt/linux-x86-64-openwrt.morph
+  morph: strata/bsp-openwrt/linux-x86-64-openwrt.morph
   repo: upstream:linux
   ref: 39a8804455fb23f09157341d3ba7db6d7ae6ee76
   unpetrify-ref: v4.0
   build-depends:
   - kmod-wrt
 - name: nasm-wrt
-  morph: strata/bsp-x86_64-openwrt/nasm-wrt.morph
+  morph: strata/bsp-openwrt/nasm-wrt.morph
   repo: upstream:nasm
   ref: 78bdad3d14fb875d5f2062957e326ba2a9e4ccb0
   unpetrify-ref: baserock/morph
 - name: syslinux-wrt
-  morph: strata/bsp-x86_64-openwrt/syslinux-wrt.morph
+  morph: strata/bsp-openwrt/syslinux-wrt.morph
   repo: upstream:syslinux
   ref: de528dd1d9e1aa53cb484fe32706f9c8e4c2763c
   unpetrify-ref: baserock/4.06-musl
