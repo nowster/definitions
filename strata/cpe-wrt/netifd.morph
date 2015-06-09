@@ -20,3 +20,7 @@ install-commands:
 - install scripts/* "$DESTDIR"/lib/netifd
 - install -d "$DESTDIR"/etc/config
 - install config/* "$DESTDIR"/etc/config
+
+post-install-commands:
+- install -d "$DESTDIR/sbin" && cd "$DESTDIR/sbin" && ln -s ..$PREFIX/sbin/netifd netifd
+
