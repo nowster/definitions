@@ -12,3 +12,6 @@ build-commands:
 
 install-commands:
 - make install
+
+post-install-commands:
+- install -d "$DESTDIR$PREFIX/sbin" && cd "$DESTDIR$PREFIX/sbin" && ln -s ../.."$PREFIX"/bin/uhttpd
