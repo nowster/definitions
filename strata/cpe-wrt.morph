@@ -56,7 +56,7 @@ chunks:
 - name: uci
   morph: strata/cpe-wrt/uci.morph
   repo: upstream:openwrt/uci
-  ref: 790d30606d545956a64f183c3199f472a70a6385
+  ref: 54ca5ae34788d4fc6afc10dfbed69517badf5cd8
   unpetrify-ref:
   build-depends:
   - libubox
