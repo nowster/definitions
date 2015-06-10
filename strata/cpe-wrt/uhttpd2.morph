@@ -1,4 +1,4 @@
-name: uhttp
+name: uhttp2
 kind: chunk
 
 pre-configure-commands:

@@ -14,3 +14,9 @@ install-commands:
 - make install
 - install -d $DESTDIR$PREFIX/include/rpcd
 - cd include/rpcd ; install * $DESTDIR$PREFIX/include/rpcd
+- install -d "$DESTDIR$PREFIX"/share/rpcd/acl.d
+- install unauthenticated.json "$DESTDIR$PREFIX"/share/rpcd/acl.d
+
+post-install-commands:
+- install -d "$DESTDIR/sbin" && cd "$DESTDIR/sbin" && ln -s ..$PREFIX/sbin/rpcd rpcd
+
