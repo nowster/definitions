@@ -77,18 +77,20 @@ chunks:
   - ubus
   - uci
   - iptables
-- name: uhttpd
-  morph: strata/cpe-wrt/uhttpd.morph
-  repo: upstream:openwrt/uhttpd
-  ref: 7c97b7862acb854baad6fbce9b12476996677f62
-  build-depends:
-  - ubox
-  - json-c
 - name: ustream-ssl
   repo: upstream:openwrt/ustream-ssl
   ref: a4ca61527236e89eb9efb782fd9bfd04796144e3
   build-depends:
   - ubox
+- name: uhttpd2
+  morph: strata/cpe-wrt/uhttpd2.morph
+  repo: upstream:openwrt/uhttpd2
+  ref: daeea305298197bb50c1e63cdd842ee1d9461d80
+  build-depends:
+  - ubox
+  - json-c
+  - ustream-ssl
+  - libubox
 - name: uclient
   repo: upstream:openwrt/uclient
   ref: 81fdb8fdf1470e1c7bf3124ff20d17feaeb519ee
