@@ -10,6 +10,7 @@ build-commands:
 install-commands:
 - install -d $DESTDIR/www
 - cd luci2/htdocs ; cp -R * $DESTDIR/www
+- cd $DESTDIR/www ; ln -s luci2.html index.html
 - install -d $DESTDIR$PREFIX/share/rpcd
 - cd luci2/share ; cp -R * $DESTDIR$PREFIX/share/rpcd
 - install -d $DESTDIR$PREFIX/lib/rpcd
