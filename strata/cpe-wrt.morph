@@ -132,8 +132,8 @@ chunks:
   - uci
   - ubus
   - libnl-tiny
-- name: mtd
-  morph: strata/cpe-wrt/mtd.morph
+- name: mtd-utils
+  morph: strata/cpe-wrt/mtd-utils.morph
   repo: upstream:mtd-utils
   ref: dcb5ebe69c663375f13aefa303c8bbbabf414ac8
   unpetrify-ref: baserock/1.5.1
