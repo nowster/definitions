@@ -32,5 +32,6 @@ install-commands:
 - install package/network/services/dnsmasq/files/dhcp.conf "$DESTDIR"/etc/config/dhcp
 - install package/network/services/dropbear/files/dropbear.config "$DESTDIR"/etc/config/dropbear
 - install package/network/config/firewall/files/firewall.config "$DESTDIR"/etc/config/firewall
+- sed -i "s/^#\toption ubus/\toption ubus/" package/network/services/uhttpd/files/uhttpd.config
 - install package/network/services/uhttpd/files/uhttpd.config "$DESTDIR"/etc/config/uhttpd
 - install package/system/rpcd/files/rpcd.config "$DESTDIR"/etc/config/rpcd
