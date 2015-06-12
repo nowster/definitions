@@ -1,0 +1,19 @@
+name: iptables
+kind: chunk
+
+configure-commands:
+- autoreconf -ivf
+- |
+  ./configure --enable-shared \
+        --enable-devel \
+        --with-xtlibdir=/usr/lib/iptables \
+        --enable-static \
+        --prefix=$PREFIX
+
+build-commands:
+- make CFLAGS="-ffunction-sections -fdata-sections -DNO_LEGACY" LDFLAGS="-lm"
+
+install-commands:
+- make install
+- install extensions/libiptext*.so $DESTDIR$PREFIX/lib/
+

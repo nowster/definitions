@@ -22,6 +22,7 @@ chunks:
   build-depends:
   - libnl-tiny
 - name: iptables
+  morph: strata/cpe-wrt/iptables.morph
   repo: upstream:iptables
   ref: fd7b66e7b6f535e56c0ee8eb442298a453ae4572
   unpetrify-ref: baserock/1.4.21-openwrt
@@ -107,7 +108,7 @@ chunks:
 - name: firewall3
   morph: strata/cpe-wrt/firewall3.morph
   repo: upstream:openwrt/firewall3
-  ref: 165029cb8c0f1545628f44143aec965e64cef021
+  ref: 980b7859bbd1db1e5e46422fccccbce38f9809ab
   unpetrify-ref:
   build-depends:
   - ubus
