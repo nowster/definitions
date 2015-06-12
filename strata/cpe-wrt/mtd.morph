@@ -1,8 +1,0 @@
-name: mtd
-kind: chunk
-
-build-commands:
-- make
-
-install-commands:
-- make DESTDIR=$DESTDIR install
