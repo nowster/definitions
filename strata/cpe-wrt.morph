@@ -23,8 +23,8 @@ chunks:
   - libnl-tiny
 - name: iptables
   repo: upstream:iptables
-  ref: 482c6d3731e2681cb4baae835c294840300197e6
-  unpetrify-ref: v1.4.21
+  ref: fd7b66e7b6f535e56c0ee8eb442298a453ae4572
+  unpetrify-ref: baserock/1.4.21-openwrt
 - name: dropbear
   morph: strata/cpe-wrt/dropbear.morph
   repo: upstream:openwrt/dropbear
