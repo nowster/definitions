@@ -14,4 +14,5 @@ install-commands:
 - make install
 
 post-install-commands:
-- install -d "$DESTDIR$PREFIX/sbin" && cd "$DESTDIR$PREFIX/sbin" && ln -s ../.."$PREFIX"/bin/uhttpd
+- install -d "$DESTDIR$PREFIX/sbin" ; cd "$DESTDIR$PREFIX/sbin" ; ln -s ../.."$PREFIX"/bin/uhttpd uhttpd
+- install -d "$DESTDIR$PREFIX/lib64" ; cd "$DESTDIR$PREFIX/lib64" ; ln -s ../.."$PREFIX"/lib/uhttpd_ubus.so uhttpd_ubus.so
