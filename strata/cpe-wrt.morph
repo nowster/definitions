@@ -26,6 +26,17 @@ chunks:
   repo: upstream:iptables
   ref: fd7b66e7b6f535e56c0ee8eb442298a453ae4572
   unpetrify-ref: baserock/1.4.21-openwrt
+- name: libpcap                                
+  morph: strata/cpe-wrt/libpcap.morph
+  repo: file:///src/workspace/libpcap
+  ref: bd12b78cd3ed0e831199e8e6a8ce9f71724f5d44
+  unpetrify-ref: baserock/1.5.3-openwrt
+- name: pppd
+  repo: file:///src/workspace/ppp
+  ref: 76b51bafb578f215eeec75e9f8dd8d25dd4b3494
+  unpetrify-ref: baserock/2.4.7-openwrt
+  build-depends:
+  - libpcap
 - name: dropbear
   morph: strata/cpe-wrt/dropbear.morph
   repo: upstream:openwrt/dropbear

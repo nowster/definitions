@@ -28,6 +28,9 @@ install-commands:
 - install package/system/rpcd/files/rpcd.init "$DESTDIR"/etc/init.d/rpcd
 - install package/system/mountd/files/mountd.init "$DESTDIR"/etc/init.d/mountd
 - install package/network/config/firewall/files/firewall.init "$DESTDIR"/etc/init.d/firewall
+- install package/network/services/ppp/files/lib/netifd/* "$DESTDIR"/lib/netifd
+- install -d $DESTDIR/etc/ppp
+- cp -r package/network/services/ppp/files/etc/ppp/* "$DESTDIR"/etc/ppp
 
 - install package/network/services/dnsmasq/files/dhcp.conf "$DESTDIR"/etc/config/dhcp
 - install package/network/services/dropbear/files/dropbear.config "$DESTDIR"/etc/config/dropbear
