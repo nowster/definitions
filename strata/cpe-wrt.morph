@@ -28,7 +28,7 @@ chunks:
   unpetrify-ref: baserock/1.4.21-openwrt
 - name: libpcap                                
   morph: strata/cpe-wrt/libpcap.morph
-  repo: upstream/libpcap
+  repo: upstream:libpcap
   ref: bd12b78cd3ed0e831199e8e6a8ce9f71724f5d44
   unpetrify-ref: baserock/1.5.3-openwrt
 - name: ppp
