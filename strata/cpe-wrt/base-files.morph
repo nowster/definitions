@@ -44,3 +44,21 @@ post-install-commands:
   for FILE in "$DESTDIR"/etc/init.d/* ; do
       IPKG_INSTROOT="$DESTDIR" bash "$DESTDIR"/etc/rc.common "$FILE" enable
   done
+  # Note that this svn version needs manually updating
+  echo "r46008" > version
+  cat <<EOF > makefile
+  SED=/bin/sed -i -e
+
+  include \$(TOPDIR)/include/toplevel.mk
+  include \$(TOPDIR)/include/version.mk
+
+  version_info:
+  XXXX\$(VERSION_SED) \$(DESTDIR)/etc/banner 
+  XXXX\$(VERSION_SED) \$(DESTDIR)/etc/openwrt_version
+  XXXX\$(VERSION_SED_SCRIPT) \$(DESTDIR)/etc/openwrt_release
+  XXXX\$(VERSION_SED_SCRIPT) \$(DESTDIR)/etc/device_info
+  EOF
+  # Work round limitations of YAML here files
+  sed -i -e 's/^  //' -e 's/XXXX/\t/' makefile
+
+  TOPDIR=`pwd` FORCE=1 make DESTDIR="$DESTDIR" -f makefile version_info
