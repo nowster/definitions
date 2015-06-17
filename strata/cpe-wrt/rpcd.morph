@@ -1,9 +1,6 @@
 name: rpcd
 kind: chunk
 
-pre-configure-commands:
-- sed -i "s/json\/json.h/json-c\/json.h/" include/rpcd/plugin.h
-
 configure-commands:
 - cmake -DCMAKE_INSTALL_PREFIX=$PREFIX
 

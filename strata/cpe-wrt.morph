@@ -136,7 +136,7 @@ chunks:
 - name: netifd
   morph: strata/cpe-wrt/netifd.morph
   repo: upstream:openwrt/netifd
-  ref: 4d84111e1014c817653db92bcd8024ff1935b6be
+  ref: 9b228148f554f0ab6d1a5fb3bfeed81ce48419a8
   unpetrify-ref:
   build-depends:
   - json-c
@@ -178,7 +178,7 @@ chunks:
 - name: rpcd
   morph: strata/cpe-wrt/rpcd.morph
   repo: upstream:openwrt/rpcd
-  ref: 805e8ce8918237d93baafa53413c5c4ef0380504
+  ref: 3d655417ab44d93aad56a6d4a668daf24b127b84
   unpetrify-ref:
   build-depends:
   - json-c
