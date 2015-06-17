@@ -38,3 +38,9 @@ install-commands:
 - sed -i "s/^#\toption ubus/\toption ubus/" package/network/services/uhttpd/files/uhttpd.config
 - install package/network/services/uhttpd/files/uhttpd.config "$DESTDIR"/etc/config/uhttpd
 - install package/system/rpcd/files/rpcd.config "$DESTDIR"/etc/config/rpcd
+
+post-install-commands:
+- |
+  for FILE in "$DESTDIR"/etc/init.d/* ; do
+      IPKG_INSTROOT="$DESTDIR" bash "$DESTDIR"/etc/rc.common "$FILE" enable
+  done
