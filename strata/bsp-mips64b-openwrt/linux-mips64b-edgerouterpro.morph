@@ -318,8 +318,7 @@ configure-commands:
   scripts/config -e NF_TABLES_IPV4
   scripts/config -e NF_TABLES_IPV6
   scripts/config -e STP
-  yes '' | make 
-oldconfig
+  yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
 install-commands:

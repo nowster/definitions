@@ -6,7 +6,7 @@ build-depends:
 - morph: strata/core-wrt.morph
 chunks:
 - name: linux-mips64b-edgerouterpro-openwrt
-  morph: strata/bsp-mips64-openwrt/linux-mips64b-edgerouterpro.morph
+  morph: strata/bsp-mips64b-openwrt/linux-mips64b-edgerouterpro.morph
   repo: github:nowster/linux-ubnt-e200
   ref: 3ca453f7a26ea5af812ae1b1bed2fb35f982701f
   unpetrify-ref: edgerouter_4.1-rc7
