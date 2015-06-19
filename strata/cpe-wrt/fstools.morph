@@ -3,6 +3,7 @@ kind: chunk
 
 pre-configure-commands:
 - sed -i "s/-Werror//" CMakeLists.txt
+- sed -i 's/ | GLOB_ONLYDIR//' libfstools/overlay.c
 
 build-commands:
 - cmake -DCMAKE_INSTALL_PREFIX=/

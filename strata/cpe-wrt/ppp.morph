@@ -1,0 +1,14 @@
+name: ppp
+kind: chunk
+
+pre-configure-commands:
+- sed -i 's/USE_LIBUTIL=y/# USE_LIBUTIL=y/' pppd/Makefile.linux
+
+configure-commands:
+- ./configure --prefix=$PREFIX
+
+build-commands:
+- make
+
+install-commands:
+- make DESTDIR=$DESTDIR install

@@ -9,18 +9,45 @@ chunks:
   repo: upstream:lzo
   ref: 5cca83e4d1b0be5825a597ab24ffa6126dc0bc95
   unpetrify-ref: lzo-2.08
+- name: lua
+  repo: upstream:lua
+  ref: 5.1.5
+  unpetrify-ref: baserock/morph
+  build-depends: []
+- name: json-c
+  repo: upstream:json-c
+  ref: ec4879ac5b502ae81f6b73450b960ede11ad2560
+  unpetrify-ref: baserock/morph
+  build-depends: []
 - name: libnl-tiny
   morph: strata/cpe-wrt/libnl-tiny.morph
   repo: upstream:openwrt/libnl-tiny
   ref: 91420e5fbbe932f93d55f0581bf43256a3dae8dc
   unpetrify-ref: master
-- name: wpa-supplicant-wrt
-  morph: strata/cpe-wrt/wpa_supplicant_wrt.morph
-  repo: upstream:hostap
-  ref: c4a58c968044c2002706b1a69c089c4d63728e77
-  unpetrify-ref: baserock/hostap_2_3
+- name: libubox
+  repo: upstream:openwrt/libubox
+  ref: 791a361ad1b08fa56e554654109122b828657a2b
+  unpetrify-ref:
+  build-depends:
+  - json-c
+  - lua
+- name: ubus
+  morph: strata/cpe-wrt/ubus.morph
+  repo: upstream:openwrt/ubus
+  ref: 2c30506a4f8434de95d9c3938857599005d0ef51
+  unpetrify-ref:
+  build-depends:
+  - libubox
+  - lua
+- name: hostapd
+  morph: strata/cpe-wrt/hostapd.morph
+  repo: file:///src/workspace/hostap
+  ref: bd9c87d27fddf5be6010457fcbcbc8d3e7a7e622
+  unpetrify-ref: baserock/2.4-openwrt
   build-depends:
   - libnl-tiny
+  - libubox
+  - ubus
 - name: iptables
   morph: strata/cpe-wrt/iptables.morph
   repo: upstream:iptables
@@ -32,6 +59,7 @@ chunks:
   ref: bd12b78cd3ed0e831199e8e6a8ce9f71724f5d44
   unpetrify-ref: baserock/1.5.3-openwrt
 - name: ppp
+  morph: strata/cpe-wrt/ppp.morph
   repo: upstream:ppp
   ref: 76b51bafb578f215eeec75e9f8dd8d25dd4b3494
   unpetrify-ref: baserock/2.4.7-openwrt
@@ -43,28 +71,11 @@ chunks:
   ref: dd0352d93b92a4cf78bc05958304bc779233d68c
   unpetrify-ref: DROPBEAR_2015.67
   build-depends: []
-- name: lua
-  repo: upstream:lua
-  ref: 5.1.5
-  unpetrify-ref: baserock/morph
-  build-depends: []
-- name: json-c
-  repo: upstream:json-c
-  ref: ec4879ac5b502ae81f6b73450b960ede11ad2560
-  unpetrify-ref: baserock/morph
-  build-depends: []
 - name: odhcp6c
   repo: upstream:openwrt/odhcp6c
-  ref: 8d9b60fb496000988f3633951f2e30380fc2de50
+  ref: d21764d12bb799f89d42c94dc20d4adb6d588077
   unpetrify-ref:
   build-depends: []
-- name: libubox
-  repo: upstream:openwrt/libubox
-  ref: 791a361ad1b08fa56e554654109122b828657a2b
-  unpetrify-ref:
-  build-depends:
-  - json-c
-  - lua
 - name: uci
   morph: strata/cpe-wrt/uci.morph
   repo: upstream:openwrt/uci
@@ -72,14 +83,6 @@ chunks:
   unpetrify-ref:
   build-depends:
   - libubox
-- name: ubus
-  morph: strata/cpe-wrt/ubus.morph
-  repo: upstream:openwrt/ubus
-  ref: 2c30506a4f8434de95d9c3938857599005d0ef51
-  unpetrify-ref:
-  build-depends:
-  - libubox
-  - lua
 - name: ubox
   morph: strata/cpe-wrt/ubox.morph
   repo: upstream:openwrt/ubox
@@ -146,9 +149,9 @@ chunks:
   - libnl-tiny
 - name: mtd-utils
   morph: strata/cpe-wrt/mtd-utils.morph
-  repo: upstream:mtd-utils
-  ref: dcb5ebe69c663375f13aefa303c8bbbabf414ac8
-  unpetrify-ref: baserock/1.5.1
+  repo: file:///src/workspace/mtd-utils
+  ref: 2c9a471870179fddc51ef5eccce2d02ee255dcf6
+  unpetrify-ref: baserock/1.5.1-openwrt
   build-depends:
   - lzo-wrt
 - name: procd

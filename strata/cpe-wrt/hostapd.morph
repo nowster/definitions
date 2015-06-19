@@ -1,0 +1,13 @@
+name: hostapd
+kind: chunk
+
+configure-commands:
+- cp files/hostapd-full.config hostapd/.config
+- echo "CONFIG_LIBNL_TINY=y" >> hostapd/.config
+- echo "CFLAGS += -I/usr/include/libnl-tiny -DLIBNL1_COMPAT -D_GNU_SOURCE" >> hostapd/.config
+
+build-commands:
+- make -C hostapd
+
+install-commands:
+- make -C hostapd DESTDIR="$DESTDIR" install
