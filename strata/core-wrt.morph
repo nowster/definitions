@@ -12,23 +12,31 @@ chunks:
 - name: cmake
   morph: strata/core/cmake.morph
   repo: upstream:cmake
-  ref: 732d8a467ab8a295b1bbf580f865980f8a1a9b29
-  unpetrify-ref: v3.2.1
+  ref: 0b3781e4c497566acaa504d4106d11c02a642501
+  unpetrify-ref: v2.8.12.2
 - name: gdbm
   morph: strata/core/gdbm.morph
   repo: upstream:gdbm-tarball
   ref: e5faeaaf75ecfb705a9b643b3e4cb881ebb69f48
   unpetrify-ref: gdbm-1.11
-- name: gettext-tarball
-  morph: strata/core/gettext-tarball.morph
+- name: autopoint
+  morph: strata/core/autopoint.morph
   repo: upstream:gettext-tarball
   ref: 482840e61f86ca321838a91e902c41d40c098bbb
   unpetrify-ref: gettext-0.19.4
+  build-depends: []
+- name: gettext-tiny
+  morph: strata/core/gettext-tiny.morph
+  repo: upstream:gettext-tiny
+  ref: eb8abea562725223ac74555879aae5a023215ba8
+  unpetrify-ref: v0.0.4
+  build-depends: []
 - name: mini-utils
   morph: strata/core/mini-utils.morph
   repo: baserock:baserock/mini-utils
-  ref: 5293265b29bbf468ab9d7f3302b19dbc81d0f8b8
+  ref: 6ca6ac97b9e1b17bebf49d34260927efe58b314e
   unpetrify-ref: master
+  build-depends: []
 - name: ncurses
   morph: strata/core/ncurses.morph
   repo: upstream:ncurses
@@ -77,7 +85,7 @@ chunks:
   unpetrify-ref: baserock/build-essential
   build-depends:
   - automake
-  - gettext-tarball                            
+  - autopoint
 - name: openssl-new
   morph: strata/core/openssl-new.morph
   repo: upstream:openssl-new
@@ -120,9 +128,8 @@ chunks:
   build-depends:
   - autoconf-tarball
   - automake
-  - gettext-tarball
+  - autopoint
   - libtool-tarball
-  - gettext-tarball
 - name: help2man
   repo: upstream:help2man
   ref: 83bab7e2e8e24a380266a9a247c029c49b0de666
@@ -139,7 +146,7 @@ chunks:
   - autoconf-tarball
   - automake
   - flex
-  - gettext-tarball
+  - autopoint
   - help2man
   - mini-utils
 - name: pkg-config
@@ -154,13 +161,14 @@ chunks:
 - name: attr
   morph: strata/core/attr.morph
   repo: upstream:attr
-  ref: 4b005410f865895d4dcd56e2c135278a7a315877
-  unpetrify-ref: baserock/morph
+  ref: fdcd484ed6f5df9a2d60ae446c325f12e3d9d0b3
+  unpetrify-ref: baserock/morph-musl
   build-depends:
   - autoconf-tarball
   - automake
-  - gettext-tarball
+  - autopoint
   - libtool-tarball
+  - gettext-tiny
 - name: acl
   morph: strata/core/acl.morph
   repo: upstream:acl
@@ -169,18 +177,18 @@ chunks:
   build-depends:
   - autoconf-tarball
   - automake
-  - gettext-tarball
+  - autopoint
   - libtool-tarball
   - attr
 - name: linux-pam
   morph: strata/core/linux-pam.morph
   repo: upstream:linux-pam
-  ref: b1521c97e73b10469f7b34c0571d51c647eca83c
-  unpetrify-ref: Linux-PAM-1.1.8
+  ref: a3ebc3aeb92ccf413253d934cf14169d1d36b15e
+  unpetrify-ref: baserock/v1.1.8-musl
   build-depends:
   - autoconf-tarball
   - automake
-  - gettext-tarball
+  - autopoint
   - libtool-tarball
   - pkg-config
   - flex
@@ -194,7 +202,7 @@ chunks:
   build-depends:
   - autoconf-tarball
   - automake
-  - gettext-tarball
+  - autopoint
   - libtool-tarball
   - pkg-config
   - attr
@@ -208,22 +216,18 @@ chunks:
   build-depends:
   - autoconf-tarball
   - automake
-  - gettext-tarball
+  - autopoint
   - libtool-tarball
   - bison
-  - attr
-  - acl
-  - linux-pam
-  - libcap2
 - name: util-linux
-  morph: strata/core/util-linux.morph
+  morph: strata/core/util-linux-musl.morph
   repo: upstream:util-linux
-  ref: 34760e62e0d5a25262a6aa801b2f1df61216363f
-  unpetrify-ref: v2.26.1
+  ref: d118c36d181352b9dd03d4f9b3203d588e410858
+  unpetrify-ref: baserock/2.25.2-musl
   build-depends:
   - autoconf-tarball
   - automake
-  - gettext-tarball
+  - autopoint
   - libtool-tarball
   - pkg-config
   - linux-pam
