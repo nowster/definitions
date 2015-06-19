@@ -1,0 +1,54 @@
+name: stage2-musl
+kind: chunk
+configure-commands:
+# Configure flag notes:
+#   1. Avoid installing to PREFIX/lib64 on x86_64.
+#   2. Location of linux-api-headers.
+#   3. Normal flags. See glibc.morph.
+#   4. Force configuration values of certain things that can't be detected
+#      in a cross-compile.
+- |
+  TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`; \
+  export CFLAGS="-O2 $CFLAGS"; export CXX=false; \
+  ./configure \
+    CROSS_COMPILE="$TARGET_STAGE1-" \
+    $ARCH_FLAGS \
+    --prefix="$PREFIX" \
+    --host=$TARGET_STAGE1 \
+    --disable-gcc-wrapper \
+    `# [1]` --libdir="$PREFIX/lib" \
+    `# [2]` --with-headers="$(pwd)/../../$PREFIX/include" \
+    `# [3]` --disable-profile  --enable-kernel=2.6.25 \
+    `# [4]` libc_cv_c_cleanup=yes libc_cv_ctors_header=yes \
+            libc_cv_forced_unwind=yes libc_cv_ssp=no
+
+build-commands:
+- make localtime=UTC
+
+install-commands:
+- make install_root="$DESTDIR" localtime=UTC install
+- export TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`; sh stage2-musl-fix-specs
+
+# Install a symlink for the program interpreter (ld.so) so that binaries
+# built in stage 3 before the stage 3 musl is built can use it.        
+# sysdeps/unix/sysv/linux/configure.      
+- install -d $DESTDIR/lib           
+- |                      
+  case "$MORPH_ARCH" in
+      armv7b|armv7l|armv7lhf)
+          ARCH="arm" ;;
+      x86_32)
+          ARCH="i386" ;;
+      x86_64)
+          ARCH="x86_64" ;;
+      ppc64)
+          ARCH="powerpc" ;;
+      mips*)
+          ARCH="mips" ;;
+      *)
+          echo "Error: unsupported Morph architecture: $MORPH_ARCH" >&2
+          exit 1
+  esac
+  loader=$(basename $(ls "$DESTDIR$PREFIX"/lib/libc.so))
+  [ -z $loader ] && ( echo "Bug in stage2-musl ld.so symlinks" ; exit 1 )
+   cd "$DESTDIR$PREFIX"/lib ; ln -s $loader ld-musl-$ARCH.so.1

@@ -14,6 +14,7 @@ kind: chunk
 # points to a file that doesn't exist.
 install-commands:
 - |
+  TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
   STAGE2_SYSROOT="$(dirname "$(pwd)")"
   specs_dir="$(dirname $($TARGET_STAGE1-gcc -print-libgcc-file-name))"
   target_specs_dir="$DESTDIR/${specs_dir#$STAGE2_SYSROOT}"

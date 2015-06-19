@@ -1,6 +1,12 @@
 name: stage2-gcc
 kind: chunk
 
+pre-configure-commands:
+- |
+  case "$MORPH_ARCH" in
+      mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
+  esac
+
 configure-commands:
 - mkdir o
 
@@ -27,7 +33,10 @@ configure-commands:
                             --with-fpu=vfpv3-d16 \
                             --with-float=hard" ;;
       armv7*)   ARCH_FLAGS="--with-arch=armv7-a" ;;
+      mips64*)  ARCH_FLAGS="--with-arch=mips64 \
+                            --with-abi=64" ;;
   esac
+  TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
   export STAGE2_SYSROOT="$(dirname $(pwd))"
   export CC="$TARGET_STAGE1-gcc --sysroot=$STAGE2_SYSROOT"
   export CXX="$TARGET_STAGE1-g++ --sysroot=$STAGE2_SYSROOT"
@@ -36,7 +45,7 @@ configure-commands:
   cd o && ../configure                                         \
             $ARCH_FLAGS                                        \
             --build=$(sh ../config.guess)                      \
-    `# [1]` --host=$TARGET_STAGE1                              \
+    `# [1]` --host=$TARGET_STAGE1                         \
     `# [1]` --target=$TARGET_STAGE1                            \
             --prefix="$PREFIX"                                 \
     `# [2]` --libdir=$PREFIX/lib                               \
@@ -47,13 +56,12 @@ configure-commands:
             --disable-multilib                                 \
             --disable-libgomp                                  \
             --disable-libstdcxx-pch                            \
+            --disable-libsanitizer                             \
             --enable-languages=c,c++
 
 build-commands:
 - |
   case "$MORPH_ARCH" in
-      armv5*)   sed -i "s/--host=none/--host=armv5/" o/Makefile
-                sed -i "s/--target=none/--target=armv5/" o/Makefile ;;
       armv7*)   sed -i "s/--host=none/--host=armv7a/" o/Makefile
                 sed -i "s/--target=none/--target=armv7a/" o/Makefile ;;
   esac
@@ -71,11 +79,10 @@ install-commands:
 # gcc/config/i386/t-linux64 and this might break things, so for now we
 # tolerate the inconsistency.
 - |
-  if [ "$(echo $TARGET | cut -c -6)" = "x86_64" ]; then
-    libdir=lib64
-  else
-    libdir=lib
-  fi
+  case "$TARGET" in
+    x86_64* | mips64*) libdir=lib64 ;;
+    *)                 libdir=lib ;;
+  esac
 
   install -d "$DESTDIR/lib"
   ln -s "$PREFIX/$libdir/libgcc_s.so" "$DESTDIR/lib/"

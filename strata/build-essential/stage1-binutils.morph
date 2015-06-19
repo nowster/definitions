@@ -16,8 +16,13 @@ configure-commands:
 # x86_64).
 
 - |
+  case "$MORPH_ARCH" in
+      mips64*)  ARCH_FLAGS="--with-arch=octeon2" ;;
+  esac
+  TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
   ./configure --prefix="$PREFIX" --disable-nls --disable-werror \
     --build=$(sh config.guess) \
     --host=$(sh config.guess) \
     --target=$TARGET_STAGE1 \
+    $ARCH_FLAGS \
     --with-sysroot=/nonexistentdir --with-lib-path="=$PREFIX/lib:=$PREFIX/lib64"

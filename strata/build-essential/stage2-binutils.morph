@@ -4,8 +4,12 @@ build-system: autotools
 
 configure-commands:
 - |
+  case "$MORPH_ARCH" in
+      mips64*)  ARCH_FLAGS="--with-arch=octeon2" ;; 
+  esac
   export STAGE2_SYSROOT="$(dirname $(pwd))"
   export CXX=false
+  TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
   # binutils has its own embedded libtool, which is old and strips out
   # `--sysroot`.  Work around by modifying the compiler command to
   # include the sysroot flag
@@ -13,7 +17,8 @@ configure-commands:
   ./configure --prefix="$PREFIX" --disable-nls --disable-werror \
     --build=$(sh config.guess) \
     --host=$TARGET_STAGE1 \
-    --target=$TARGET_STAGE1
+    --target=$TARGET_STAGE1 \
+    $ARCH_FLAGS
 
 build-commands:
 - |

@@ -2,8 +2,12 @@ name: stage2-make
 kind: chunk
 build-system: autotools
 configure-commands:
-- STAGE2_SYSROOT="$(dirname $(pwd))" CPPFLAGS="--sysroot=$STAGE2_SYSROOT" CXX=false
-  LDFLAGS="--sysroot=$STAGE2_SYSROOT" ./configure --prefix="$PREFIX" --disable-nls
-  --build=$(sh config/config.guess) --host=$TARGET_STAGE1
+- |
+  export STAGE2_SYSROOT="$(dirname $(pwd))" 
+  export CPPFLAGS="--sysroot=$STAGE2_SYSROOT" 
+  export CXX=false
+  export TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`;
+  export LDFLAGS="--sysroot=$STAGE2_SYSROOT" 
+  ./configure --prefix="$PREFIX" --disable-nls --build=$(sh config/config.guess) --host=$TARGET_STAGE1
 build-commands:
 - STAGE2_SYSROOT="$(dirname $(pwd))" make

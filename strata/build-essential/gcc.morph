@@ -1,21 +1,11 @@
 name: gcc
 kind: chunk
 
-products:
-- artifact: gcc-libs
-  include:
-  - (usr/)lib/lib.*\.so(\.\d+)*$
-- artifact: gcc-doc
-  include:
-  - (usr/)?share/doc/.*
-  - (usr/)?share/man/.*
-  - (usr/)?share/info/.*
-- artifact: gcc-devel
-  # devel includes everything which isn't documentation or libs, since
-  # everything else gcc produces is required for compiling
-  # this is the -devel artifact instead of -misc, since it goes in -devel
-  # stratum artifacts by default
-  include: [ .* ]
+pre-configure-commands:
+- |
+  case "$MORPH_ARCH" in
+      mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
+  esac
 
 configure-commands:
 - mkdir o
@@ -34,22 +24,30 @@ configure-commands:
                             --with-fpu=vfpv3-d16 \
                             --with-float=hard" ;;
       armv7*)   ARCH_FLAGS="--with-arch=armv7-a" ;;
+      mips64*)  ARCH_FLAGS="--with-arch=octeon2 \
+                            --with-abi=64" ;;
   esac
 
+  TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
   cd o && ../configure                                        \
             $ARCH_FLAGS                                       \
+            --build=$TARGET_STAGE1                       \
             --prefix="$PREFIX"                                \
     `# [1]` --libdir=$PREFIX/lib                              \
             --disable-bootstrap                               \
     `# [2]` --with-system-zlib                                \
     `# [3]` --disable-multilib                                \
+            --disable-libgomp                                 \
+            --disable-libmudflap                              \
+            --disable-nls                                     \
+            --disable-decimal-float                           \
+            --disable-libsanitizer                            \
             --enable-languages=c,c++,fortran
+
 
 build-commands:
 - |
   case "$MORPH_ARCH" in
-      armv5*)   sed -i "s/--host=none/--host=armv5/" o/Makefile
-                sed -i "s/--target=none/--target=armv5/" o/Makefile ;;
       armv7*)   sed -i "s/--host=none/--host=armv7a/" o/Makefile
                 sed -i "s/--target=none/--target=armv7a/" o/Makefile ;;
   esac

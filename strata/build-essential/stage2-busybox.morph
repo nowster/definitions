@@ -2,6 +2,7 @@ name: stage2-busybox
 kind: chunk
 
 configure-commands:
+- TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
 # Explicitly setting HOSTCC is required because we have a 'gcc' earlier in
 # the PATH supplied by the stage2-gcc chunk, which can't execute outside of
 # the stage 3 staging area.
@@ -31,30 +32,65 @@ configure-commands:
 
 # General features that we don't need.
 - sed -e 's/CONFIG_FEATURE_MOUNT_CIFS=y.*/# CONFIG_FEATURE_MOUNT_CIFS is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_EXTRA_COMPAT=y.*/# CONFIG_FEATURE_EXTRA_COMPAT is not set/' -i .config
 - sed -e 's/CONFIG_FEATURE_EXTRA_QUIET=y.*/# CONFIG_FEATURE_EXTRA_QUIET is not set/' -i .config
 - sed -e 's/CONFIG_FEATURE_INIT_COREDUMPS=y.*/# CONFIG_FEATURE_INIT_COREDUMPS is not set/' -i .config
 - sed -e 's/CONFIG_FEATURE_INIT_SCTTY=y.*/# CONFIG_FEATURE_INIT_SCTTY is not set/' -i .config
 - sed -e 's/CONFIG_FEATURE_INIT_SYSLOG=y.*/# CONFIG_FEATURE_INIT_SYSLOG is not set/' -i .config
 - sed -e 's/CONFIG_FEATURE_INITRD=y.*/# CONFIG_FEATURE_INITRD is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_ROUTE=y.*/# CONFIG_FEATURE_IP_ROUTE is not set/' -i .config
 - sed -e 's/CONFIG_FEATURE_USE_INITTAB=y.*/# CONFIG_FEATURE_USE_INITTAB is not set/' -i .config
 - sed -e 's/CONFIG_FEATURE_MINIX2=y.*/# CONFIG_FEATURE_MINIX2 is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IFCONFIG_SLIP=y.*/# CONFIG_FEATURE_IFCONFIG_SLIP is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_INETD_RPC=y.*/# CONFIG_FEATURE_INETD_RPC is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_SELINUX=y.*/# CONFIG_FEATURE_SELINUX is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_SYSTEMD=y.*/# CONFIG_FEATURE_SYSTEMD is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_HAVE_RPC=y.*/# CONFIG_FEATURE_HAVE_RPC is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_VI_REGEX_SEARCH=y.*/# CONFIG_FEATURE_VI_REGEX_SEARCH is not set/' -i .config
+- sed -e 's/CONFIG_IFPLUGD=y.*/# CONFIG_IFPLUGD is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_LINK=y.*/# CONFIG_FEATURE_IP_LINK is not set/' -i .config
 - sed -e 's/CONFIG_FSCK_MINIX=y.*/# CONFIG_FSCK_MINIX is not set/' -i .config
 - sed -e 's/CONFIG_HALT=y.*/# CONFIG_HALT is not set/' -i .config
+- sed -e 's/CONFIG_IFCONFIG=y.*/# CONFIG_IFCONFIG is not set/' -i .config
+- sed -e 's/CONFIG_IPLINK=y.*/# CONFIG_IPLINK is not set/' -i .config
+- sed -e 's/CONFIG_IPROUTE=y.*/# CONFIG_IPROUTE is not set/' -i .config
 - sed -e 's/CONFIG_INIT=y.*/# CONFIG_INIT is not set/' -i .config
 - sed -e 's/CONFIG_INIT_TERMINAL_TYPE=y.*/CONFIG_INIT_TERMINAL_TYPE=""/' -i .config
 - sed -e 's/CONFIG_LOSETUP=y.*/# CONFIG_LOSETUP is not set/' -i .config
 - sed -e 's/CONFIG_LSUSB=y.*/# CONFIG_LSUSB is not set/' -i .config
 - sed -e 's/CONFIG_LZMA=y.*/# CONFIG_LZMA is not set/' -i .config
 - sed -e 's/CONFIG_MKFS_EXT2=y.*/# CONFIG_MKFS_EXT2 is not set/' -i .config
+- sed -e 's/CONFIG_MOUNT_NFS=y.*/# CONFIG_MOUNT_NFS is not set/' -i .config
 - sed -e 's/CONFIG_MKFS_MINIX=y.*/# CONFIG_MKFS_MINIX is not set/' -i .config
+- sed -e 's/CONFIG_PAM=y.*/# CONFIG_PAM is not set/' -i .config
 - sed -e 's/CONFIG_RUNLEVEL=y.*/# CONFIG_RUNLEVEL is not set/' -i .config
+- sed -e 's/CONFIG_SELINUXENABLED=y.*/# CONFIG_SELINUXENABLED is not set/' -i .config
 - sed -e 's/CONFIG_STRINGS=y.*/# CONFIG_STRINGS is not set/' -i .config
 - sed -e 's/CONFIG_UNLZMA=y.*/# CONFIG_UNLZMA is not set/' -i .config
 - sed -e 's/CONFIG_UNXZ=y.*/# CONFIG_UNXZ is not set/' -i .config
 - sed -e 's/CONFIG_XZ=y.*/# CONFIG_XZ is not set/' -i .config
+- sed -e 's/CONFIG_WERROR=y.*/# CONFIG_WERROR is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IFUPDOWN_IP_BUILTIN=y.*/# CONFIG_FEATURE_IFUPDOWN_IP_BUILTIN is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IFUPDOWN_IPV4=y.*/# CONFIG_FEATURE_IFUPDOWN_IPV4 is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IFUPDOWN_IPV6=y.*/# CONFIG_FEATURE_IFUPDOWN_IPV6 is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IFUPDOWN_MAPPING=y.*/# CONFIG_FEATURE_IFUPDOWN_MAPPING is not set/' -i .config
+- sed -e 's/CONFIG_IP=y.*/# CONFIG_IP is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_ADDRESS=y.*/# CONFIG_FEATURE_IP_ADDRESS is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_LINK=y.*/# CONFIG_FEATURE_IP_LINK is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_ROUTE=y.*/# CONFIG_FEATURE_IP_ROUTE is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_TUNNEL=y.*/# CONFIG_FEATURE_IP_TUNNEL is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_RULE=y.*/# CONFIG_FEATURE_IP_RULE is not set/' -i .config
+- sed -e 's/CONFIG_FEATURE_IP_SHORT_FORMS=y.*/# CONFIG_FEATURE_IP_SHORT_FORMS is not set/' -i .config
+- sed -e 's/CONFIG_IPADDR=y.*/# CONFIG_IPADDR is not set/' -i .config
+- sed -e 's/CONFIG_IPLINK=y.*/# CONFIG_IPLINK is not set/' -i .config
+- sed -e 's/CONFIG_IPROUTE=y.*/# CONFIG_IPROUTE is not set/' -i .config
+- sed -e 's/CONFIG_IPTUNNEL=y.*/# CONFIG_IPTUNNEL is not set/' -i .config
+- sed -e 's/CONFIG_IPRULE=y.*/# CONFIG_IPRULE is not set/' -i .config
+
 
 build-commands:
 - |
+  TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
   export STAGE2_SYSROOT="$(dirname $(pwd))"
   export CPPFLAGS="--sysroot=$STAGE2_SYSROOT"
   export LDFLAGS="--sysroot=$STAGE2_SYSROOT"
@@ -64,6 +100,7 @@ install-commands:
 # We expect to be built with a non-standard prefix in stage 2 (i.e. not
 # /usr). The install will break if prefix is set to /usr.
 - |
+  TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`
   export STAGE2_SYSROOT="$(dirname $(pwd))"
   export CPPFLAGS="--sysroot=$STAGE2_SYSROOT"
   export LDFLAGS="--sysroot=$STAGE2_SYSROOT"
