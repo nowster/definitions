@@ -1,0 +1,43 @@
+name: coreutils-common-musl
+kind: stratum
+description: |
+  We need to split this so we can build stuff using coreutils but we can not
+  having it in the final systems (for example in genivi ones that do not
+  accept GPLv3 code)
+build-depends:
+- morph: strata/core-wrt.morph
+chunks:
+- name: gperf             
+  morph: strata/core/gperf.morph
+  repo: upstream:gperf
+  ref: 5094e4a539adf845111013f82c2c4fcaec637983
+  unpetrify-ref: baserock/morph 
+  build-depends: [] 
+- name: patch             
+  morph: strata/core/patch.morph
+  repo: upstream:patch
+  ref: 3bbb26c928a147cfcf0756f1cc0a1307e5cc663f
+  unpetrify-ref: baserock/v2.7.1
+  build-depends: []
+- name: coreutils
+  morph: strata/coreutils-common/coreutils-musl.morph
+  repo: upstream:coreutils
+  ref: 9df9643842e4b4d8ece710fe6105f32fa38a0d22
+  unpetrify-ref: baserock/8.23
+  build-depends:
+  - gperf
+  - patch
+- name: sed
+  morph: strata/coreutils-common/sed-musl.morph
+  repo: upstream:sed
+  ref: ed4b1d7c04f92b330b940d4f0d02cd51d2473ce9
+  unpetrify-ref: baserock/morph
+  build-depends:
+  - coreutils
+- name: diff
+  morph: strata/coreutils-common/diff-musl.morph
+  repo: upstream:diffutils
+  ref: bd86eb1a1e87ab85a7c8dbb658fa829ce69c252e
+  unpetrify-ref: baserock/v3.3
+  build-depends:
+  - coreutils
