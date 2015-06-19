@@ -41,7 +41,7 @@ chunks:
   - lua
 - name: hostapd
   morph: strata/cpe-wrt/hostapd.morph
-  repo: upstream:openwrt/hostap
+  repo: upstream:hostap
   ref: bd9c87d27fddf5be6010457fcbcbc8d3e7a7e622
   unpetrify-ref: baserock/2.4-openwrt
   build-depends:
