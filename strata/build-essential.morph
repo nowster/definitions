@@ -278,8 +278,8 @@ chunks:
 - name: busybox-musl
   morph: strata/build-essential/busybox.morph
   repo: upstream:busybox
-  ref: 1ecfe811fe2f70380170ef7d820e8150054e88ca
-  unpetrify-ref: 1_23_1
+  ref: 4f3cd7769e5006319e5b3b7ceedf47e00f35fe4e
+  unpetrify-ref: baserock/1.23.2-openwrt
   build-depends:
   - stage2-binutils-musl
   - stage2-busybox-musl
