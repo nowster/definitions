@@ -41,7 +41,7 @@ chunks:
   - lua
 - name: hostapd
   morph: strata/cpe-wrt/hostapd.morph
-  repo: file:///src/workspace/hostap
+  repo: upstream:openwrt/hostap
   ref: bd9c87d27fddf5be6010457fcbcbc8d3e7a7e622
   unpetrify-ref: baserock/2.4-openwrt
   build-depends:
@@ -149,7 +149,7 @@ chunks:
   - libnl-tiny
 - name: mtd-utils
   morph: strata/cpe-wrt/mtd-utils.morph
-  repo: file:///src/workspace/mtd-utils
+  repo: upstream:mtd-utils
   ref: 2c9a471870179fddc51ef5eccce2d02ee255dcf6
   unpetrify-ref: baserock/1.5.1-openwrt
   build-depends:
