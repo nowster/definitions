@@ -31,6 +31,12 @@ description: |
   stage2-fhs-dirs.morph for details. Basically, /bin is a symlink to
   /tools/bin during stage 2 but in stage 3 it becomes a real directory
   again.
+products:                                                                   
+- artifact: build-essential-minimal                                         
+  include:                                                                  
+  - fhs-dirs-.*                                                             
+  - busybox-.*                                                              
+  - musl-.*
 chunks:
 - name: stage1-binutils-musl
   morph: strata/build-essential/stage1-binutils.morph

@@ -1,5 +1,27 @@
 name: musl
 kind: chunk
+
+products:
+- artifact: musl-libs
+  include:
+  - lib(32|64)?/ld-.*
+- artifact: musl-bins
+  include:
+  - (usr/)?s?bin/.*
+- artifact: musl-libs
+  include:
+  - (usr/)?lib(32|64)?/lib[^/]*\.so(\.\d+)*$
+- artifact: musl-devel
+  include:
+  - (usr/)?include/.*
+  - (usr/)?lib(32|64)?/lib.*\.a
+  - (usr/)?lib(32|64)?/lib.*\.la
+  - (usr/)?(lib(32|64)?|share)/pkgconfig/.*\.pc
+  - (usr/)?lib(32|64)?/.*\.o
+- artifact: musl-misc
+  include:
+  - .*
+
 configure-commands:
 - ./configure --prefix="$PREFIX"
 build-commands:
