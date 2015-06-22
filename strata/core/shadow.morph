@@ -2,4 +2,4 @@ name: shadow
 kind: chunk
 build-system: autotools
 configure-commands:
-- ./autogen.sh --with-selinux=no --sysconfdir=/etc
+- ./autogen.sh --with-selinux=no --sysconfdir=/etc --disable-nls
