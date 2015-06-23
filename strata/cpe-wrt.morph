@@ -9,11 +9,6 @@ chunks:
   repo: upstream:lzo
   ref: 5cca83e4d1b0be5825a597ab24ffa6126dc0bc95
   unpetrify-ref: lzo-2.08
-- name: lua
-  repo: upstream:lua
-  ref: 5.1.5
-  unpetrify-ref: baserock/morph
-  build-depends: []
 - name: json-c
   repo: upstream:json-c
   ref: ec4879ac5b502ae81f6b73450b960ede11ad2560
@@ -25,12 +20,12 @@ chunks:
   ref: 91420e5fbbe932f93d55f0581bf43256a3dae8dc
   unpetrify-ref: master
 - name: libubox
+  morph: strata/cpe-wrt/libubox.morph
   repo: upstream:openwrt/libubox
   ref: 791a361ad1b08fa56e554654109122b828657a2b
   unpetrify-ref:
   build-depends:
   - json-c
-  - lua
 - name: ubus
   morph: strata/cpe-wrt/ubus.morph
   repo: upstream:openwrt/ubus
@@ -38,7 +33,6 @@ chunks:
   unpetrify-ref:
   build-depends:
   - libubox
-  - lua
 - name: hostapd
   morph: strata/cpe-wrt/hostapd.morph
   repo: upstream:hostap

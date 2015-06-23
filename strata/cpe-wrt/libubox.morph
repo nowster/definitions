@@ -1,4 +1,4 @@
-name: uci
+name: libubox
 kind: chunk
 
 configure-commands:
@@ -9,6 +9,3 @@ build-commands:
 
 install-commands:
 - make install
-
-post-install-commands:
-- install -d "$DESTDIR/sbin" && cd "$DESTDIR/sbin" && ln -s ..$PREFIX/bin/uci uci

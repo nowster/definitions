@@ -2,6 +2,7 @@ name: iwinfo
 kind: chunk
 
 build-commands:
+- sed -i -e 's/\$(IWINFO_LUA_OBJ)//' -e '/IWINFO_LUA/d' Makefile
 - make CFLAGS=-fPIC
 
 install-commands:
@@ -10,7 +11,5 @@ install-commands:
 - cd include/iwinfo ; install * $DESTDIR$PREFIX/include/iwinfo
 - install -d $DESTDIR$PREFIX/lib
 - install libiwinfo.so $DESTDIR$PREFIX/lib/libiwinfo.so
-- install -d $DESTDIR$PREFIX/lib/lua
-- install iwinfo.so $DESTDIR$PREFIX/lib/lua/iwinfo.so
 - install -d $DESTDIR$PREFIX/bin
 - install iwinfo $DESTDIR$PREFIX/bin/iwinfo

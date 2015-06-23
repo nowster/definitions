@@ -5,7 +5,7 @@ pre-configure-commands:
 - sed -i 's/-Werror//' CMakeLists.txt
 
 configure-commands:
-- cmake -DCMAKE_INSTALL_PREFIX=$PREFIX
+- cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DLUA_SUPPORT=FALSE
 
 build-commands:
 - make

@@ -2,7 +2,7 @@ name: ubus
 kind: chunk
 
 build-commands:
-- cmake -DCMAKE_INSTALL_PREFIX=$PREFIX
+- cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_LUA=FALSE
 - make
 
 install-commands:
