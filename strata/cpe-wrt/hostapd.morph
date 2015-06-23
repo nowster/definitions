@@ -10,4 +10,4 @@ build-commands:
 - make -C hostapd
 
 install-commands:
-- make -C hostapd DESTDIR="$DESTDIR" install
+- make -C hostapd DESTDIR="$DESTDIR" BINDIR="$PREFIX"/sbin install
