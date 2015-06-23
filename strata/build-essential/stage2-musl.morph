@@ -43,6 +43,8 @@ install-commands:
           ARCH="x86_64" ;;
       ppc64)
           ARCH="powerpc" ;;
+      mips*l)
+          ARCH="mipsel" ;;
       mips*)
           ARCH="mips" ;;
       *)
