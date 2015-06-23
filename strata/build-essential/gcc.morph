@@ -29,6 +29,14 @@ pre-configure-commands:
       mips64*)  sed -i "s/^\(\#define\s\+MIPS_ABI_DEFAULT\s\+\)ABI_32/\1ABI_64/" gcc/config/mips/mips.h ;;
   esac
 
+- |
+  sed -i '/tmake_file="${tmake_file} t-softfp"/a\
+  	case ${host} in\
+  	*-musl)\
+  		tmake_file="mips/t-mips t-softfp-sfdf"\
+  		;;\
+  	esac' libgcc/config.host
+
 configure-commands:
 - mkdir o
 
