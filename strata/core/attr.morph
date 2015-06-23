@@ -16,12 +16,4 @@ configure-commands:
               --datadir="$PREFIX"/share
 install-commands:
 - |
-  make DESTDIR="$DESTDIR" PKG_BIN_DIR="$DESTDIR$PREFIX"/bin \
-                          PKG_SBIN_DIR="$DESTDIR$PREFIX"/sbin \
-                          PKG_LIB_DIR="$DESTDIR$PREFIX"/lib64 \
-                          PKG_DEVLIB_DIR="$DESTDIR$PREFIX"/lib64 \
-                          PKG_INC_DIR="$DESTDIR$PREFIX"/include/attr \
-                          PKG_DATA_DIR="$DESTDIR$PREFIX"/share \
-                          PKG_MAN_DIR="$DESTDIR$PREFIX"/share/man \
-                          PKG_DOC_DIR="$DESTDIR$PREFIX"/share/doc/attr \
-                          install-lib install-dev
+  make DESTDIR="$DESTDIR" install-lib install-dev
