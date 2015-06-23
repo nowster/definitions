@@ -2,7 +2,7 @@ name: uci
 kind: chunk
 
 configure-commands:
-- cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_LUA=FALSE
+- cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_LUA=OFF
 
 build-commands:
 - make
