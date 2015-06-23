@@ -175,10 +175,6 @@ chunks:
   ref: f13e09bd54fd4a501c4952f002ed2752bdd9f93b
   unpetrify-ref: v2.2.52
   build-depends:
-  - autoconf-tarball
-  - automake
-  - autopoint
-  - libtool-tarball
   - attr
 - name: linux-pam
   morph: strata/core/linux-pam.morph
