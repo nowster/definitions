@@ -118,11 +118,9 @@ chunks:
   - readline
 - name: libtool-tarball
   morph: strata/core/libtool-tarball.morph
-  repo: upstream:libtool
-  ref: d388b7f2dc628b22006025d01179bc09b8aabe81
+  repo: upstream:libtool-tarball
+  ref: c026ca36e37d2643623a75d0d3e9e451023139f3
   unpetrify-ref: libtool-2.4.6
-  build-depends:
-  - bash
 - name: xz
   repo: upstream:xz
   ref: a0cd05ee71d330b79ead6eb9222e1b24e1559d3a
