@@ -29,6 +29,7 @@ install-commands:
 - install package/system/mountd/files/mountd.init "$DESTDIR"/etc/init.d/mountd
 - install package/network/config/firewall/files/firewall.init "$DESTDIR"/etc/init.d/firewall
 - install package/network/services/ppp/files/lib/netifd/* "$DESTDIR"/lib/netifd
+- install package/network/services/hostapd/files/netifd.sh "$DESTDIR"/lib/netifd/hostapd.sh
 - install -d $DESTDIR/etc/ppp
 - cp -r package/network/services/ppp/files/etc/ppp/* "$DESTDIR"/etc/ppp
 
@@ -45,7 +46,7 @@ post-install-commands:
       IPKG_INSTROOT="$DESTDIR" bash "$DESTDIR"/etc/rc.common "$FILE" enable
   done
   # Note that this svn version needs manually updating
-  echo "r46008" > version
+  echo "r46115" > version
   cat <<EOF > makefile
   SED=/bin/sed -i -e
 
