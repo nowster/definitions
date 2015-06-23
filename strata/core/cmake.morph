@@ -1,5 +1,10 @@
 name: cmake
 kind: chunk
+pre-configure-commands:
+# Missing header include
+- echo "#include <sys/stat.h>" >> Source/cmStandardIncludes.h
+# Prevent segfault when boostrapping and looking for curses library
+- sed -i 's/NOT CMAKE_SYSTEM_NAME MATCHES syllable/0/' CMakeLists.txt
 configure-commands:
 - ./bootstrap --prefix="$PREFIX" --docdir=/share/doc/cmake --mandir=/share/man
 build-commands:
