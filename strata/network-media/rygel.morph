@@ -1,0 +1,17 @@
+name: rygel
+kind: chunk
+description: Home media solution
+build-system: autotools
+pre-configure-commands:
+# We haven't packaged docbook, so can't generate the manpages.
+- echo "SUBDIRS = reference" >doc/Makefile.am
+configure-commands:
+- |
+  ./autogen.sh \
+              --prefix="$PREFIX" \
+              --localstatedir=/var \
+              --sysconfdir=/etc \
+              --disable-tracker-plugin
+#post-install-commands:
+# Needed for the next version, but not for the stable one
+#- ln -s rygel/mx-extract "$DESTDIR"/"$PREFIX"/libexec/mx-extract

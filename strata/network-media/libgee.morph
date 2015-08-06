@@ -1,0 +1,7 @@
+name: libgee
+kind: chunk
+description: GObject collection library
+build-system: autotools
+pre-configure-commands:
+# Busybox sed vs GNU sed
+- sed -i 's/ -nE / -nr /' gee/Makefile.am

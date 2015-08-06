@@ -1,0 +1,52 @@
+name: network-media
+kind: stratum
+description: DLNA services
+build-depends:
+- morph: strata/core.morph
+- morph: strata/libsoup-common.morph
+- morph: strata/foundation.morph
+- morph: strata/tools.morph
+- morph: strata/multimedia-gstreamer-soup.morph
+chunks:
+- name: gssdp
+  repo: upstream:gnome/gssdp
+  ref: 52be23b05145448f45486fd0134221e31859aba6
+  unpetrify-ref: gssdp-0.14.11
+- name: gupnp
+  repo: upstream:gnome/gupnp
+  ref: 2c2410d4a7130a46cd5d4b19710c7adf2e2031ed
+  unpetrify-ref: gupnp-0.20.14
+  build-depends:
+  - gssdp
+- name: gupnp-av
+  repo: upstream:gnome/gupnp-av
+  ref: 9751a782f56c9b4ab80c00e14def4d0aa221777d
+  unpetrify-ref: gupnp-av-0.12.7
+  build-depends:
+  - gupnp
+- name: gupnp-dlna
+  repo: upstream:gnome/gupnp-dlna
+  ref: 34fee0402931e8374ccbcaba2403ae82d2d9e8a7
+  unpetrify-ref: gupnp-dlna-0.10.2
+  build-depends:
+  - gupnp
+- name: libgee
+  morph: strata/network-media/libgee.morph
+  repo: upstream:gnome/libgee
+  ref: 4c5a09345a7e15180a7615a57fa23e42d89005b9
+  unpetrify-ref: 0.18.0
+- name: libmediaart
+  repo: upstream:gnome/libmediaart
+  ref: b3a4fdef06300cc972977ac14ec662977b7e02ba
+  unpetrify-ref: 1.9.0
+- name: rygel
+  morph: strata/network-media/rygel.morph
+  repo: upstream:rygel
+  ref: cf05fbf67788fbb100c3b40764298436ebe50c0e
+  unpetrify-ref: RYGEL_0_27_2
+  build-depends:
+  - gupnp
+  - gupnp-av
+  - gupnp-dlna
+  - libgee
+  - libmediaart

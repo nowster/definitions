@@ -1,0 +1,48 @@
+name: dlna-system-mips64b
+kind: system
+description: The system that should be used for building all other Baserock systems for 64-bit MIPS computers.
+arch: mips64b
+strata:
+- name: build-essential
+  morph: strata/build-essential.morph
+- name: core
+  morph: strata/core.morph
+- name: foundation
+  morph: strata/foundation.morph
+- name: tools
+  morph: strata/tools.morph
+#- name: morph-utils
+#  morph: strata/morph-utils.morph
+#- name: nfs
+#  morph: strata/nfs.morph
+#- name: ansible
+#  morph: strata/ansible.morph
+#- name: cloudinit-support
+#  morph: strata/cloudinit-support.morph
+#- name: openstack-clients
+#  morph: strata/openstack-clients.morph
+#- name: devtools
+#  morph: strata/devtools.morph
+#- name: samba
+#  morph: strata/samba.morph
+- name: audio-bluetooth
+  morph: strata/audio-bluetooth.morph
+- name: multimedia-common
+  morph: strata/multimedia-common.morph
+- name: libsoup-common
+  morph: strata/libsoup-common.morph
+- name: multimedia-gstreamer-soup
+  morph: strata/multimedia-gstreamer-soup.morph
+- name: network-media
+  morph: strata/network-media.morph
+- name: bsp-mips64b-edgerouterpro
+  morph: strata/bsp-mips64b-edgerouterpro.morph
+configuration-extensions:
+- set-hostname
+- add-config-files
+- nfsboot
+- install-files
+- distbuild
+- fstab
+- mason
+- cloud-init
