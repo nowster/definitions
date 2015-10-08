@@ -2,8 +2,22 @@ name: stage2-binutils
 kind: chunk
 build-system: autotools
 
+pre-configure-commands:
+# We do a fix-up of MIPS architectures in configure.tgt.
+# Apparently this patch has been going round since at least 2013
+# and upstream continues to fail to take it.
+- sed -i '
+  s/targ_emul=elf32ltsmipn32$/targ_emul=elf64ltsmip/;
+  s/targ_emul=elf32btsmipn32$/targ_emul=elf64btsmip/;
+  s/elf32btsmipn32 elf32ltsmip elf32btsmip elf64ltsmip elf64btsmip/elf32ltsmipn32 elf32btsmipn32 elf32ltsmip elf32btsmip elf64btsmip/;
+  s/elf32ltsmipn32 elf32btsmip elf32ltsmip elf64btsmip elf64ltsmip/elf32btsmipn32 elf32ltsmipn32 elf32btsmip elf32ltsmip elf64ltsmip/
+  ' ld/configure.tgt
+
 configure-commands:
 - |
+  case "$MORPH_ARCH" in
+      mips64*)  ARCH_FLAGS="--with-arch=octeon2" ;;
+  esac
   export STAGE2_SYSROOT="$(dirname $(pwd))"
   export CXX="$TARGET_STAGE1-g++ --sysroot=$STAGE2_SYSROOT"
   # binutils has its own embedded libtool, which is old and strips out
@@ -11,6 +25,7 @@ configure-commands:
   # include the sysroot flag
   export CC="$TARGET_STAGE1-gcc --sysroot=$STAGE2_SYSROOT"
   ./configure --prefix="$PREFIX" --disable-nls --disable-werror \
+    $ARCH_FLAGS                                                 \
     --build=$(sh config.guess) \
     --host=$TARGET_STAGE1 \
     --target=$TARGET_STAGE1

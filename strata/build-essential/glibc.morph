@@ -46,6 +46,9 @@ configure-commands:
   case "$MORPH_ARCH" in
       armv7*)
           ARCH_FLAGS="--without-fp" ;;
+      mips64*)
+          ARCH_FLAGS="--with-arch=octeon2"
+          ARCH_CFLAGS="-mabi=64" ;;
   esac
 
   # We override the PATH here to remove /tools/bin from it.
@@ -54,7 +57,7 @@ configure-commands:
   # of the shebang in some scripts and these scripts will be broken if
   # they point to bash in /tools/bin/bash.
   export PATH="/usr/bin:/sbin:/bin";
-  export CFLAGS="-O2 $CFLAGS";
+  export CFLAGS="-O2 $ARCH_CFLAGS $CFLAGS";
   cd o && ../configure \
     $ARCH_FLAGS \
     --prefix="$PREFIX" \

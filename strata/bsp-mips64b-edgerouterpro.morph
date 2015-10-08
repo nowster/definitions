@@ -1,0 +1,11 @@
+name: bsp-mips64b-edgerouterpro
+kind: stratum
+description: The platform dependent components required to boot EdgeRouter Pro
+build-depends:
+- morph: strata/core.morph
+chunks:
+- name: linux-mips64b-edgerouterpro
+  morph: strata/bsp-mips64b-edgerouterpro/linux-mips64b-edgerouterpro.morph
+  repo: upstream:linux
+  ref: 8c3c7e3c73a6fd43708656499be152875d0ca572
+  unpetrify-ref: baserock/mips/v4.2
