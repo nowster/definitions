@@ -37,7 +37,6 @@ chunks:
   repo: upstream:binutils-redhat
   ref: b1d3b01332ae49a60ff5d6bf53d3a5b1805769c8
   unpetrify-ref: baserock/build-essential
-  build-depends: []
   build-mode: bootstrap
   prefix: /tools
 
@@ -141,24 +140,22 @@ chunks:
   repo: upstream:bash
   ref: 3590145af6f1c9fa321dff231f69ae696e7e740b
   unpetrify-ref: baserock/bash-4.3-patch-27
-  build-depends: []
   build-mode: bootstrap
   prefix: /tools
 
 - name: stage2-fhs-dirs-musl
   morph: strata/build-essential-musl/stage2-fhs-dirs.morph
   repo: baserock:baserock/fhs-dirs
-  ref: 41bbb474cd4647ee715bc94c21c161d12a20deb4
+  ref: 1218cbd38a4f4e9da75af6f7fae946ca92666afb
   unpetrify-ref: master
-  build-depends: []
   build-mode: bootstrap
   prefix: /tools
 
 - name: stage2-gawk-musl
   morph: strata/build-essential-musl/stage2-gawk.morph
   repo: upstream:gawk
-  ref: 1da41261fba4cd03a32362d44c8634f599ae64db
-  unpetrify-ref: master
+  ref: 925f9363c4b0a5bb9375298afcdcf404efb32587
+  unpetrify-ref: gawk-4.1-stable
   build-depends:
   - stage1-binutils-musl
   - stage1-gcc-musl
@@ -169,8 +166,8 @@ chunks:
 - name: stage2-make-musl
   morph: strata/build-essential-musl/stage2-make.morph
   repo: upstream:make-tarball
-  ref: f75919b038da8a28388a911303fb86ed7a70ea2c                            
-  unpetrify-ref: make-4.1 
+  ref: 4978d7129e42340ab9efeb0cb9cae4ad0fa052d4
+  unpetrify-ref: baserock/make-4.1-ttyname-segfault-fix
   build-depends:
   - stage1-binutils-musl
   - stage1-gcc-musl
@@ -194,7 +191,7 @@ chunks:
 - name: fhs-dirs-musl
   morph: strata/build-essential-musl/fhs-dirs.morph
   repo: baserock:baserock/fhs-dirs
-  ref: 41bbb474cd4647ee715bc94c21c161d12a20deb4
+  ref: 1218cbd38a4f4e9da75af6f7fae946ca92666afb
   unpetrify-ref: master
   build-depends:
   - stage2-binutils-musl
@@ -243,8 +240,9 @@ chunks:
 
 - name: zlib-musl
   repo: upstream:zlib
-  ref: db333af7e9b90a23fd7f9cd8dc128123b34bf698
-  unpetrify-ref: baserock/build-essential
+  ref: 50893291621658f355bc5b4d450a8d06a563053d
+  unpetrify-ref: v1.2.8
+  build-system: autotools
   build-depends:
   - stage2-binutils-musl
   - stage2-busybox-musl
@@ -295,8 +293,8 @@ chunks:
 - name: gawk-musl
   morph: strata/build-essential-musl/gawk.morph
   repo: upstream:gawk
-  ref: 1da41261fba4cd03a32362d44c8634f599ae64db
-  unpetrify-ref: master
+  ref: dc5af665700d9b04fdf9c18930526d28eef5d5d9
+  unpetrify-ref: gawk-4.1.1
   build-depends:
   - stage2-binutils-musl
   - stage2-busybox-musl
@@ -346,8 +344,8 @@ chunks:
 - name: make-musl
   morph: strata/build-essential-musl/make.morph
   repo: upstream:make-tarball
-  ref: f75919b038da8a28388a911303fb86ed7a70ea2c                            
-  unpetrify-ref: make-4.1 
+  ref: 4978d7129e42340ab9efeb0cb9cae4ad0fa052d4
+  unpetrify-ref: baserock/make-4.1-ttyname-segfault-fix
   build-depends:
   - stage2-binutils-musl
   - stage2-busybox-musl

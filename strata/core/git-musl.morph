@@ -2,7 +2,7 @@ name: git-musl
 kind: chunk
 build-system: autotools
 pre-configure-commands:
-- make configure 
+- make configure
 configure-commands:
 - ./configure --prefix=$PREFIX NO_GETTEXT=1 NO_MSGFMT=1  NO_TCLTK=1
 build-commands:

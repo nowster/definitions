@@ -1,5 +1,9 @@
 name: nasm
 kind: chunk
 build-system: autotools
+pre-configure-commands:
+# In musl builds we don't have xml tools. Who needs manpages anyway?
+- sed -i '/^all:/s/manpages//' Makefile.in
+- sed -i '/mandir)\/man1/d' Makefile.in
 install-commands:
 - make INSTALLROOT="$DESTDIR" install

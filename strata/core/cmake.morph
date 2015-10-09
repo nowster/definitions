@@ -1,5 +1,11 @@
 name: cmake
 kind: chunk
+pre-configure-commands:
+- |
+  # This fixes musl build, where mode_t is not defined in
+  # the usual place. It's otherwise harmless.
+  sed -i '/typedef unsigned short mode_t;/a#else\
+  #include <sys/stat.h>' Source/cmStandardIncludes.h
 configure-commands:
 - ./bootstrap --prefix="$PREFIX" --docdir=/share/doc/cmake --mandir=/share/man
 build-commands:

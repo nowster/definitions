@@ -13,7 +13,9 @@ strata:
 - name: bsp-x86_64-musl
   morph: strata/bsp-x86_64-musl.morph
 configuration-extensions:
-- set-hostname
-- nfsboot
-- install-files
-- busybox-init
+- extensions/set-hostname
+- extensions/add-config-files
+- extensions/nfsboot
+- extensions/install-files
+- extensions/install-essential-files
+

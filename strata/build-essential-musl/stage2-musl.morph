@@ -30,10 +30,10 @@ install-commands:
 - export TARGET_STAGE1=`echo $TARGET_STAGE1 | sed -e 's/bootstrap-linux-gnu/linux-musl/'`; sh stage2-musl-fix-specs
 
 # Install a symlink for the program interpreter (ld.so) so that binaries
-# built in stage 3 before the stage 3 musl is built can use it.        
-# sysdeps/unix/sysv/linux/configure.      
-- install -d $DESTDIR/lib           
-- |                      
+# built in stage 3 before the stage 3 musl is built can use it.
+# sysdeps/unix/sysv/linux/configure.
+- install -d $DESTDIR/lib
+- |
   case "$MORPH_ARCH" in
       armv7b|armv7l|armv7lhf)
           ARCH="arm" ;;

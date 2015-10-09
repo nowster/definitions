@@ -2,9 +2,9 @@ name: autopoint
 kind: chunk
 configure-commands:
 - ./configure --prefix="$PREFIX"
-build-commands: 
+build-commands:
 - make
-install-commands: 
+install-commands:
 - install -d $DESTDIR$PREFIX/bin
 - cd gettext-tools/misc ; install -m 755 autopoint "$DESTDIR$PREFIX/bin/autopoint"
 - install -d $DESTDIR$PREFIX/share/gettext
